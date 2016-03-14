@@ -30,6 +30,6 @@ void MainWindow::createMenuBar(){
     exit = fileMenu->addAction(tr("&Sair"));
     menuBar->addMenu(fileMenu);
 
-    connect(exit, SIGNAL(triggered()), this, SLOT(exit()));
+    connect(exit, SIGNAL(triggered()), this, SLOT(close()));
 
 }
