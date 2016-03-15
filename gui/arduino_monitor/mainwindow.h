@@ -33,7 +33,7 @@ private:
     QMenuBar *menuBar;
     QMenu *fileMenu;
     QAction *exit;
-    QPlainTextEdit *editor;
+    QTextEdit *editor;
 
 };
 
