@@ -20,8 +20,22 @@ public:
 	Console();
 
 	// Canais de comunicação?
-	void sendData(QString string);
-	int readData();
+	void show(QString string);
+
+private:
+
+	// Caractere que mostra que o terminal está
+	// aguardando comandos
+	const QChar awaiting = '>';
+
+	// Função responsável por inicializar o console
+	void setUp();
+
+	// Responsável por processar as teclas digitadas
+	void keyPressEvent(QKeyEvent *key);
+
+	// Função responsável pela mensagem de boas-vindas
+	void greetings();
 };
 
 #endif // CONSOLE_H
