@@ -1,35 +1,52 @@
 #include "mainwindow.h"
 #include "console.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-{
-    ui_area = new QWidget;
-    createMenuBar();
+
+// Construtor da janela principal
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
+
+	// Adiciona um título à janela principal
+	setWindowTitle(tr("Monitor de Arduino"));
+
+	// Cria o espaço para dispor
+	// widgets ao usuário
+	ui_area = new QWidget;
+	// Cria a barra de menus
+	createMenuBar();
+	// Cria um console
+	Console *console = new Console;
+	// Cria um layout
+	QVBoxLayout *mainLayout = new QVBoxLayout;
 
 
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-    mainLayout->setMenuBar(menuBar);
+	// Adiciona widgets ao layout
+	mainLayout->setMenuBar(menuBar);
+	mainLayout->addWidget(console);
 
-    Console *editor = new Console;
-    mainLayout->addWidget(editor);
-    setCentralWidget(ui_area);
-    ui_area->setLayout(mainLayout);
-    setWindowTitle(tr("Monitor de Arduino"));
+	// Define a ui_area como widget central
+	// e aplica um layout a ela
+	setCentralWidget(ui_area);
+	ui_area->setLayout(mainLayout);
 }
 
-MainWindow::~MainWindow()
-{
+// Destrutor
+MainWindow::~MainWindow() {
 
 }
 
+// Função para criar a barra de menus
+void MainWindow::createMenuBar() {
 
-void MainWindow::createMenuBar(){
-    menuBar = new QMenuBar;
-    fileMenu = new QMenu(tr("&Arquivo"),this);
-    exit = fileMenu->addAction(tr("&Sair"));
-    menuBar->addMenu(fileMenu);
+	// Cria a barra de menu
+	menuBar = new QMenuBar;
+	// Cria o menu "Arquivo" e seus submenus
+	fileMenu = new QMenu(tr("&Arquivo"),this);
+	exit = fileMenu->addAction(tr("&Sair"));
 
-    connect(exit, SIGNAL(triggered()), this, SLOT(close()));
+	// Adiciona os menus à barra de menus
+	menuBar->addMenu(fileMenu);
+
+	// Adiciona uma ação caso seja clicado em "Sair"
+	connect(exit, SIGNAL(triggered()), this, SLOT(close()));
 
 }

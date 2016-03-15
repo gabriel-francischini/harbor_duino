@@ -18,22 +18,38 @@ class QTextEdit;
 QT_END_NAMESPACE
 
 
+// Estrutura da janela principal
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+
+	// Construtor e destrutor, que são
+	// responsáveis por iniciar e fechar
+	// a tela inicial, respectivamente
+	MainWindow(QWidget *parent = 0);
+	~MainWindow();
 
 private:
-    void createMenuBar();
 
-    QWidget *ui_area;
-    QMenuBar *menuBar;
-    QMenu *fileMenu;
-    QAction *exit;
-    QTextEdit *editor;
+	// Função para criar a barra de menus, no topo
+	void createMenuBar();
+
+
+	// ui_area corresponde à area que o
+	// programa pode dispor widgets para o usuário
+	QWidget *ui_area;
+
+	// menuBar é uma váriavel para guardar a
+	// barra de menus, no topo
+	QMenuBar *menuBar;
+
+	// esses são os menus e submenus, além
+	// das ações disponíveis a partir da
+	// barra de menu
+	QMenu *fileMenu;
+	QAction *exit;
 
 };
 
