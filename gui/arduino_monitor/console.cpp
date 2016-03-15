@@ -19,6 +19,10 @@ Console::Console(){
 // Função responsável por iniciar o console
 void Console::setUp(){
 
+	// Define o símbolo de que o terminal
+	// está desocupado
+	awaiting = '>';
+
 	// Muda a largura e a fonte do cursor
 	int cursor_value = 10;
 	setCursorWidth(cursor_value);

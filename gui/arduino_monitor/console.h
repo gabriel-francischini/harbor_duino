@@ -26,7 +26,7 @@ private:
 
 	// Caractere que mostra que o terminal está
 	// aguardando comandos
-	const QChar awaiting = '>';
+	 QChar awaiting;
 
 	// Função responsável por inicializar o console
 	void setUp();
