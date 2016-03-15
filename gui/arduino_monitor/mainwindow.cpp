@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "console.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -10,8 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->setMenuBar(menuBar);
 
-    editor = new QTextEdit;
-    editor->setCursorWidth(7);
+    Console *editor = new Console;
     mainLayout->addWidget(editor);
     setCentralWidget(ui_area);
     ui_area->setLayout(mainLayout);
