@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "console.h"
 
-
 // Construtor da janela principal
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
@@ -15,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	createMenuBar();
 	// Cria um console
 	Console *console = new Console;
+	Communicator *communicator = new Communicator;
+	console->setCommunicator(communicator);
 	// Cria um layout
 	QVBoxLayout *mainLayout = new QVBoxLayout;
 

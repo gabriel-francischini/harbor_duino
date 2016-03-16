@@ -32,6 +32,10 @@ public:
 
 private:
 
+	QStringList implemented_commands;
+
+	void setUpCommands();
+
 	// Caractere que mostra que o terminal está
 	// aguardando comandos
 	 QChar awaiting;

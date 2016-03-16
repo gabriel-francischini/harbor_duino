@@ -7,6 +7,7 @@ Console::Console(){
 	// Não permitir entrada enquanto
 	// estiver iniciando
 	setReadOnly(true);
+	setUpCommands();
 	setUp();
 	greetings();
 	comm_online = false;
@@ -124,19 +125,29 @@ void Console::keyPressEvent(QKeyEvent *key){
 
 	// Caso seja enter, processe o comando
 	// da forma que deve ser processado
-	if (key->key() == Qt::Key_Return){
+	if (key->key() == Qt::Key_Return || key->key() == Qt::Key_Enter){
 		QString last_command = text.remove(0, last_line + 1);
-		last_command = last_command.toLower();
-		QStringList implemented_commands;
-		implemented_commands << "clear";
-
+		last_command = last_command.toLower().simplified();
 		switch (implemented_commands.indexOf(last_command)){
 			case 0:
 				clear();
 				showAwaiting();
 				break;
+			case 8:
+			case 9:
+			case 10:
+				if (comm_online) show(tr("Ligado\n"));
+				else show(tr("Desligado\n"));
+				break;
+			case 11:
+				clear();
+				setReadOnly(true);
+				break;
 			default:
-				show(tr("Comando desconhecido.\n"));
+				if (comm_online)
+					show(communicator->execute(last_command));
+				else
+					show(tr("Comando desconhecido.\n"));
 				break;
 		}
 		return;
@@ -146,6 +157,24 @@ void Console::keyPressEvent(QKeyEvent *key){
 	// siga o procedimento padrão
 	QTextEdit::keyPressEvent(key);
 
+}
+
+
+void Console::setUpCommands(){
+	implemented_commands
+			<< "limpar terminal" // 0
+			<< "definir terminal fundo cor" // 1
+			<< "definir terminal texto cor" // 2
+			<< "definir terminal texto tamanho" // 3
+			<< "definir terminal cursor tamanho" // 4
+			<< "definir terminal fundo selecionado cor" // 5
+			<< "definir terminal texto selecionado cor" // 6
+			<< "definir terminal estilo" // 7
+			<< "comunicador ligado?" // 8
+			<< "comunicador online?" // 9
+			<< "comm_online" // 10
+			<< "sair" // 11
+			;
 }
 
 
