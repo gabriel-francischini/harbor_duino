@@ -130,6 +130,7 @@ void Console::keyPressEvent(QKeyEvent *key){
 		last_command = last_command.toLower().simplified();
 		switch (implemented_commands.indexOf(last_command)){
 			case 0:
+			case 12:
 				clear();
 				showAwaiting();
 				break;
@@ -174,6 +175,7 @@ void Console::setUpCommands(){
 			<< "comunicador online?" // 9
 			<< "comm_online" // 10
 			<< "sair" // 11
+			<< "limpar" // 12
 			;
 }
 
