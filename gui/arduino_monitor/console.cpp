@@ -9,6 +9,7 @@ Console::Console(){
 	setReadOnly(true);
 	setUp();
 	greetings();
+	comm_online = false;
 	setReadOnly(false);
 
 }
@@ -53,14 +54,20 @@ void Console::setUp(){
 
 void Console::show(QString string){
 	setReadOnly(true);
-	append(string);
+	append(string.prepend("  "));
 	append(awaiting);
+	setReadOnly(false);
+}
+
+void Console::showAwaiting(){
+	setReadOnly(true);
+	insertPlainText(awaiting);
 	setReadOnly(false);
 }
 
 
 void Console::greetings(){
-	show(tr("Iniciando terminal..."));
+	show(tr("Iniciando o terminal..."));
 }
 
 
@@ -115,11 +122,48 @@ void Console::keyPressEvent(QKeyEvent *key){
 	// Atualize o cursor
 	setTextCursor(cursor);
 
+	// Caso seja enter, processe o comando
+	// da forma que deve ser processado
+	if (key->key() == Qt::Key_Return){
+		QString last_command = text.remove(0, last_line + 1);
+		last_command = last_command.toLower();
+		QStringList implemented_commands;
+		implemented_commands << "clear";
+
+		switch (implemented_commands.indexOf(last_command)){
+			case 0:
+				clear();
+				showAwaiting();
+				break;
+			default:
+				show(tr("Comando desconhecido.\n"));
+				break;
+		}
+		return;
+	}
+
 	// Se não for nenhum dos casos anteriores,
 	// siga o procedimento padrão
 	QTextEdit::keyPressEvent(key);
 
-	if (key->key() == Qt::Key_Enter){
+}
 
-	}
+
+void Console::setCommunicator(Communicator *communicator){
+	this->communicator = communicator;
+	comm_online = true;
+}
+
+
+bool Console::isCommOnline(){
+	return comm_online;
+}
+
+
+Communicator Console::getCommunicator(){
+	return *communicator;
+};
+
+void Console::unsetCommunicator(){
+	comm_online = false;
 }
