@@ -28,4 +28,7 @@
 *.app
 
 
-gui/debug/
+gui/debug/*
+gui/debug
+gui/debug/debug/*
+gui/debug/debug/
