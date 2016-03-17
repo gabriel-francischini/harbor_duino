@@ -10,27 +10,38 @@ Communicator::Communicator(){
 QString Communicator::execute(QString command){
 	QString unknown = QString("Comando desconhecido.\n");
 	QStringList commands = command.split(' ', QString::SkipEmptyParts);
-	#define comm_at(M) known_comm.value(commands[M].insert(commands[M].length() + 1, QString("")))
-	#define level(M) if(commands.length() > M);
-	//return QString("%1").arg(known_comm.value(commands[0], 2));
-		switch (comm_at(0)) {
-			case 1:
-				level (1)
-				switch (comm_at(1)) {
-					case 2:
-						QStringList ports = getNamePorts();
-						QString result("");
-						foreach(const QString &name, ports)
-							result.append(name);
-						return result;
-						break;
-				}
-				break;
-			default:
-				return unknown;
-				break;
+	commands = addNullChar(commands);
+
+	switch (testCommand(&commands)) {
+		case 1:
+			if (!commands.isEmpty())
+			switch (testCommand(&commands)) {
+				case 2:
+					QStringList ports = getNamePorts();
+					QString result("");
+					foreach(const QString &name, ports)
+						result.append(name);
+					return result;
+					break;
+			}
+			break;
+		default:
+			return unknown;
+			break;
 	}
 		return unknown;
+}
+
+QStringList Communicator::addNullChar(QStringList list){
+	foreach(QString string, list)
+		string.insert(string.length() + 1, QString(""));
+	return list;
+}
+
+int Communicator::testCommand(QStringList *command){
+	int result = known_comm.value(command->first());
+	command->removeFirst();
+	return result;
 }
 
 void Communicator::setUpKnowCommands(){
