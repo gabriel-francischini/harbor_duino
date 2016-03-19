@@ -3,7 +3,6 @@
 #include <QtSerialPort/QSerialPortInfo>
 #include <QtCore>
 
-
 class Communicator{
 
 public:
@@ -25,13 +24,10 @@ public:
 
 private:
 
-	int testCommand(QStringList *command);
+
 	QSerialPort *connected_port;
-	QStringList addNullChar(QStringList list);
 	bool connected;
 	QList<QSerialPortInfo> getPortList();
-	QMap<QString, int> known_comm;
-	void setUpKnowCommands();
 
 };
 

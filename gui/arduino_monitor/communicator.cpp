@@ -1,54 +1,15 @@
 #include "communicator.h"
 #include <QTextStream>
+#include "communicatorparser.h"
 
 Communicator::Communicator(){
-	setUpKnowCommands();
 	connected = false;
 }
 
 
 QString Communicator::execute(QString command){
-	QString unknown = QString("Comando desconhecido.\n");
-	QStringList commands = command.split(' ', QString::SkipEmptyParts);
-	commands = addNullChar(commands);
-
-	switch (testCommand(&commands)) {
-		case 1:
-			if (!commands.isEmpty())
-			switch (testCommand(&commands)) {
-				case 2:
-					QStringList ports = getNamePorts();
-					QString result("");
-					foreach(const QString &name, ports)
-						result.append(name);
-					return result;
-					break;
-			}
-			break;
-		default:
-			return unknown;
-			break;
-	}
-		return unknown;
-}
-
-QStringList Communicator::addNullChar(QStringList list){
-	foreach(QString string, list)
-		string.insert(string.length() + 1, QString(""));
-	return list;
-}
-
-int Communicator::testCommand(QStringList *command){
-	int result = known_comm.value(command->first());
-	command->removeFirst();
-	return result;
-}
-
-void Communicator::setUpKnowCommands(){
-	known_comm.insert("mostrar", 1);
-	known_comm.insert("show", 1);
-	known_comm.insert("listar", 1);
-	known_comm.insert("portas", 2);
+	CommunicatorParser parser(this);
+	return parser.execute(command);
 }
 
 QList<QSerialPortInfo> Communicator::getPortList(){

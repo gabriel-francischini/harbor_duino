@@ -4,7 +4,7 @@
 // Construtor do console
 Console::Console(){
 
-	// Não permitir entrada enquanto
+	// Não permitir entrada de texto enquanto
 	// estiver iniciando
 	setReadOnly(true);
 	setUpCommands();
@@ -21,7 +21,7 @@ Console::Console(){
 // Função responsável por iniciar o console
 void Console::setUp(){
 
-	// Define o símbolo de que o terminal
+	// Define o símbolo que significa que o terminal
 	// está desocupado
 	awaiting = '>';
 
@@ -31,7 +31,7 @@ void Console::setUp(){
 	setCurrentFont(QFont("Consolas", cursor_value));
 
 	// Cria uma paleta e guarda as cores
-	// que tornam o console mais old-school
+	// que tornam o console mais amigável
 	QPalette colors = this->palette();
 	colors.setColor(QPalette::Base, Qt::black);
 	colors.setColor(QPalette::Text, Qt::green);

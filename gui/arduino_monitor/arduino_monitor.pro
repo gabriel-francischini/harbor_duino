@@ -15,8 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     console.cpp \
-    communicator.cpp
+    communicator.cpp \
+    parser.cpp \
+    communicatorparser.cpp
 
 HEADERS  += mainwindow.h \
     console.h \
-    communicator.h
+    communicator.h \
+    parser.h \
+    communicatorparser.h
