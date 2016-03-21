@@ -1,6 +1,7 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 #include <QtWidgets>
+#include <QObject>
 #include "communicator.h"
 
 // Essa é a classe do console, responsável
@@ -26,7 +27,7 @@ public:
 
 	// Funções relativas ao comunicador com o Arduino
 	void setCommunicator(Communicator *communicator);
-	Communicator getCommunicator();
+	Communicator *getCommunicator();
 	bool isCommOnline();
 	void unsetCommunicator();
 

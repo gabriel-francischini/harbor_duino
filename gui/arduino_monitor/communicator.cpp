@@ -4,6 +4,9 @@
 
 Communicator::Communicator(){
 	connected = false;
+	connect(connected_port, SIGNAL(readyRead()), SLOT(handleReadyRead()));
+	connect(connected_port, SIGNAL(error(QSerialPort::SerialPortError)),
+			SLOT(handleError(QSerialPort::SerialPortError)));
 }
 
 
@@ -32,6 +35,23 @@ QSerialPortInfo Communicator::getInfoPortByName(QString name){
 		if(port.portName() == name)
 			port_info = port;
 	return port_info;
+}
+
+QString Communicator::connectTo(QString name){
+	connected_port->setPort(getInfoPortByName(name));
+	if(connected_port->open(QIODevice::ReadWrite)){
+		beConnected();
+		return QString(QString("Conectado à porta %1, na velocidade de "
+						  "%2 bytes por segundo, com %3 bits de informação.")
+					   .arg(connected_port->portName()).arg(connected_port->
+						baudRate()).arg(connected_port->dataBits()));
+		}
+	else return QString("Erro ao tentar abrir a porta %1.")
+			.arg(connected_port->portName());
+	}
+
+void Communicator::beConnected(){
+	connected = true;
 }
 
 
@@ -78,4 +98,8 @@ QString Communicator::getVendor(QString name){
 
 bool Communicator::isBusy(QString name){
 	return getInfoPortByName(name).isBusy();
+}
+
+bool Communicator::isConnected(){
+	return connected;
 }

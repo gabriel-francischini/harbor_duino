@@ -191,8 +191,8 @@ bool Console::isCommOnline(){
 }
 
 
-Communicator Console::getCommunicator(){
-	return *communicator;
+Communicator* Console::getCommunicator(){
+	return communicator;
 };
 
 void Console::unsetCommunicator(){

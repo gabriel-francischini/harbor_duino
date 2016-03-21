@@ -1,9 +1,11 @@
 #ifndef COMMUNICATOR_H
 #define COMMUNICATOR_H
 #include <QtSerialPort/QSerialPortInfo>
+#include <qserialport.h>
 #include <QtCore>
 
-class Communicator{
+
+class Communicator : QObject{
 
 public:
 	Communicator();
@@ -21,10 +23,16 @@ public:
 	QString getVendor(QString name);
 	QString getProduct(QString name);
 	bool isBusy(QString name);
+	QString connectTo(QString name);
+
+private slots:
+	void handleReadyRead();
+	void handleError(QSerialPort::SerialPortError error);
 
 private:
 
-
+//	Q_DISABLE_COPY(Communicator);
+	void beConnected();
 	QSerialPort *connected_port;
 	bool connected;
 	QList<QSerialPortInfo> getPortList();
