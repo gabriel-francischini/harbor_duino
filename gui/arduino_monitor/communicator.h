@@ -28,10 +28,15 @@ public:
 private slots:
 	void handleReadyRead();
 	void handleError(QSerialPort::SerialPortError error);
+	void handleTimeout();
 
 private:
 
-//	Q_DISABLE_COPY(Communicator);
+	QByteArray readArray;
+	QByteArray writeArray;
+	QTimer timer;
+	qint64 bytesWritten;
+	int MaxTimeout;
 	void beConnected();
 	QSerialPort *connected_port;
 	bool connected;

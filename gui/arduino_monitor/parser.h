@@ -16,6 +16,8 @@ protected:
 	QStringList addNullChar(QStringList list);
 	QMap<QString, int> known_commands;
 	virtual void setUpKnowCommands();
+	virtual QStringList takeArg(QStringList user_input, QStringList valid_options);
+	QStringList removeNullChar(QStringList list);
 
 };
 

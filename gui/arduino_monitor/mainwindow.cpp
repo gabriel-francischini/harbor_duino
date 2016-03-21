@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	createMenuBar();
 	// Cria um console
 	Console *console = new Console;
-	Communicator *communicator = new Communicator;
+	Communicator *communicator;
 	console->setCommunicator(communicator);
 	// Cria um layout
 	QVBoxLayout *mainLayout = new QVBoxLayout;

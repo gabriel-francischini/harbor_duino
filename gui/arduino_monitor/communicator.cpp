@@ -4,15 +4,31 @@
 
 Communicator::Communicator(){
 	connected = false;
-	connect(connected_port, SIGNAL(readyRead()), SLOT(handleReadyRead()));
+	connect(connected_port, SIGNAL(readyRead()), this, SLOT(handleReadyRead()));
 	connect(connected_port, SIGNAL(error(QSerialPort::SerialPortError)),
-			SLOT(handleError(QSerialPort::SerialPortError)));
+			this, SLOT(handleError(QSerialPort::SerialPortError)));
+	connect(&timer, SIGNAL(timeout()), SLOT(handleTimeout()));
 }
 
 
 QString Communicator::execute(QString command){
 	CommunicatorParser parser(this);
 	return parser.execute(command);
+}
+
+void Communicator::handleReadyRead(){
+	readArray.append(connected_port->readAll());
+
+	if(!timer.isActive())
+		timer.start(10000);
+}
+
+void Communicator::handleError(QSerialPort::SerialPortError){
+
+}
+
+void Communicator::handleTimeout(){
+
 }
 
 QList<QSerialPortInfo> Communicator::getPortList(){
@@ -24,7 +40,7 @@ QList<QSerialPortInfo> Communicator::getPortList(){
 QStringList Communicator::getNamePorts(){
 	QStringList list;
 	foreach(const QSerialPortInfo &port, getPortList()){
-		list << port.description();
+		list << QString(port.portName());
 	}
 	return list;
 }
@@ -38,6 +54,9 @@ QSerialPortInfo Communicator::getInfoPortByName(QString name){
 }
 
 QString Communicator::connectTo(QString name){
+
+	if(!isPortValid(name)) return QString("A porta \"%1\" é inválida.").arg(name);
+
 	connected_port->setPort(getInfoPortByName(name));
 	if(connected_port->open(QIODevice::ReadWrite)){
 		beConnected();
