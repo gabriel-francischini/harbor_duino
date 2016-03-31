@@ -24,6 +24,8 @@ public:
 	QString getProduct(QString name);
 	bool isBusy(QString name);
 	QString connectTo(QString name);
+	bool hasPort();
+	void setPort(QSerialPort *port);
 
 private slots:
 	void handleReadyRead();
@@ -38,9 +40,10 @@ private:
 	qint64 bytesWritten;
 	int MaxTimeout;
 	void beConnected();
-	QSerialPort *connected_port;
+	QSerialPort *connected_port = new QSerialPort;
 	bool connected;
 	QList<QSerialPortInfo> getPortList();
+	bool isPortAvailable;
 
 };
 

@@ -55,19 +55,29 @@ QSerialPortInfo Communicator::getInfoPortByName(QString name){
 
 QString Communicator::connectTo(QString name){
 
-	if(!isPortValid(name)) return QString("A porta \"%1\" é inválida.").arg(name);
-
-	connected_port->setPort(getInfoPortByName(name));
+	//connected_port = new QSerialPort;
+	//if(!isPortValid(name)) return QString("A porta \"%1\" é inválida.").arg(name);
+	//connected_port->setPort(getInfoPortByName(name));
+	connected_port->setPort(QSerialPortInfo::availablePorts().at(0));
+	//connected_port->setPortName("COM7");
+	//connected_port->setBaudRate(QSerialPort::Baud9600, QSerialPort::AllDirections);
+	//connected_port->setDataBits(QSerialPort::Data8);
+	//connected_port->setParity(QSerialPort::NoParity);
+	//connected_port->setStopBits(QSerialPort::OneStop);
+	//connected_port->setFlowControl(QSerialPort::NoFlowControl);
 	if(connected_port->open(QIODevice::ReadWrite)){
-		beConnected();
-		return QString(QString("Conectado à porta %1, na velocidade de "
-						  "%2 bytes por segundo, com %3 bits de informação.")
-					   .arg(connected_port->portName()).arg(connected_port->
-						baudRate()).arg(connected_port->dataBits()));
+		//beConnected();
+		//return QString(QString("Conectado à porta %1, na velocidade de "
+		//				  "%2 bytes por segundo, com %3 bits de informação.")
+		//			   .arg(connected_port->portName()).arg(connected_port->
+		//				baudRate()).arg(connected_port->dataBits()));
 		}
-	else return QString("Erro ao tentar abrir a porta %1.")
-			.arg(connected_port->portName());
-	}
+	//else return QString("Erro ao tentar abrir a porta %1.")
+	//		.arg(connected_port->portName());
+
+	return QString("Comando desativado por questões técnicas."
+				   "Utilize a interface gráfica para esta função.");
+}
 
 void Communicator::beConnected(){
 	connected = true;
@@ -121,4 +131,14 @@ bool Communicator::isBusy(QString name){
 
 bool Communicator::isConnected(){
 	return connected;
+}
+
+bool Communicator::hasPort(){
+
+	return isPortAvailable;
+}
+
+void Communicator::setPort(QSerialPort *port){
+	connected_port = port;
+	isPortAvailable = true;
 }

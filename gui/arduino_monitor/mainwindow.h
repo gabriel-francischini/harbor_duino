@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtCore>
 #include <QtWidgets>
+#include <QSerialPort>
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -30,6 +31,11 @@ public:
 	// a tela inicial, respectivamente
 	MainWindow(QWidget *parent = 0);
 	~MainWindow();
+	QSerialPort *connected_port = new QSerialPort;
+
+
+private slots:
+	void connectTo();
 
 private:
 
@@ -49,6 +55,8 @@ private:
 	// das ações disponíveis a partir da
 	// barra de menu
 	QMenu *fileMenu;
+	QMenu *optionsMenu;
+	QAction *m_connect;
 	QAction *exit;
 
 };

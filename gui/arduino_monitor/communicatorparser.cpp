@@ -29,7 +29,7 @@ QString CommunicatorParser::execute(QString command){
 			commands.removeFirst();
 
 			commands = takeArg(commands, this->communicator->getNamePorts());
-			//removeNullChar(commands);
+			removeNullChar(commands);
 			return this->communicator->connectTo(commands.first());
 	}
 

@@ -16,6 +16,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	Console *console = new Console;
 	Communicator *communicator;
 	console->setCommunicator(communicator);
+
+	///connected_port = new QSerialPort(this);
+	//communicator->setPort(connected_port);
+
 	// Cria um layout
 	QVBoxLayout *mainLayout = new QVBoxLayout;
 
@@ -47,7 +51,30 @@ void MainWindow::createMenuBar() {
 	// Adiciona os menus à barra de menus
 	menuBar->addMenu(fileMenu);
 
+	optionsMenu = new QMenu(tr("&Opções"), this);
+	m_connect = optionsMenu->addAction(tr("&Conectar"));
+	menuBar->addMenu(optionsMenu);
+
 	// Adiciona uma ação caso seja clicado em "Sair"
 	connect(exit, SIGNAL(triggered()), this, SLOT(close()));
+	connect(m_connect, SIGNAL(triggered()), this, SLOT(connectTo()));
+
+}
+
+void MainWindow::connectTo(){
+	connected_port->setPort(QSerialPortInfo::availablePorts().at(0));
+
+	if(connected_port->open(QIODevice::ReadWrite)){
+		QMessageBox *diag = new QMessageBox;
+		diag->setText("Porta aberta com sucesso!");
+		diag->exec();
+		}
+	else {
+		QMessageBox *diag = new QMessageBox;
+		diag->setText(QString("A porta não foi aberta. Erro %1: %2")
+					  .arg(connected_port->error())
+					  .arg(connected_port->errorString()));
+		diag->exec();
+	}
 
 }

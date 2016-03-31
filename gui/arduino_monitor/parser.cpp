@@ -39,13 +39,32 @@ QStringList Parser::takeArg(QStringList user_input,
 							QStringList valid_options){
 
 	QStringList user_copy = user_input;
-	QString str;
+	int words_taken = 0;
+	QString result_word;
+	QStringList result;
+	result_word.append(user_input.first());
+	bool is_not_first_run = false;
 
-	foreach(QString input, user_copy)
-		foreach(QString option, valid_options)
-			str.append(input).append(option);
+	foreach(QString input, user_copy){
+		if(is_not_first_run){
+			result_word.append(' ');
+			result_word.append(input);
+		}
 
-	QStringList user;
-	user.append(str);
-	return user;
+		foreach(QString option, valid_options){
+			if(result_word.compare(option)==0){
+				for(; words_taken>=0; words_taken--)
+					user_copy.removeAt(words_taken);
+
+				result.append(result_word);
+				foreach(QString word, user_copy)
+					result.append(word);
+				return result;
+			}
+		}
+		is_not_first_run = true;
+	}
+
+	result.append(result_word);
+	return result;
 }

@@ -127,7 +127,7 @@ void Console::keyPressEvent(QKeyEvent *key){
 	// da forma que deve ser processado
 	if (key->key() == Qt::Key_Return || key->key() == Qt::Key_Enter){
 		QString last_command = text.remove(0, last_line + 1);
-		last_command = last_command.toLower().simplified();
+		last_command = last_command.simplified();
 		switch (implemented_commands.indexOf(last_command)){
 			case 0:
 			case 12:
