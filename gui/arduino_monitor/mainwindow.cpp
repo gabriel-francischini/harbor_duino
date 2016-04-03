@@ -4,20 +4,24 @@
 // Construtor da janela principal
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
+
 	// Adiciona um título à janela principal
 	setWindowTitle(tr("Monitor de Arduino"));
 
 	// Cria o espaço para dispor
 	// widgets ao usuário
 	ui_area = new QWidget;
+
 	// Cria a barra de menus
 	createMenuBar();
+
 	// Cria um console
 	Console *console = new Console;
 	Communicator *communicator;
 	console->setCommunicator(communicator);
 
-	///connected_port = new QSerialPort(this);
+	//connected_port = new QSerialPort(this);
+	//connected_port = new QSerialPort(this);
 	//communicator->setPort(connected_port);
 
 	// Cria um layout
@@ -62,19 +66,29 @@ void MainWindow::createMenuBar() {
 }
 
 void MainWindow::connectTo(){
-	connected_port->setPort(QSerialPortInfo::availablePorts().at(0));
 
-	if(connected_port->open(QIODevice::ReadWrite)){
+
+	connected_port = new QSerialPort;
+	if(QSerialPortInfo::availablePorts().isEmpty()){
 		QMessageBox *diag = new QMessageBox;
-		diag->setText("Porta aberta com sucesso!");
-		diag->exec();
-		}
-	else {
-		QMessageBox *diag = new QMessageBox;
-		diag->setText(QString("A porta não foi aberta. Erro %1: %2")
-					  .arg(connected_port->error())
-					  .arg(connected_port->errorString()));
+		diag->setText("Não há portas disponíveis.");
 		diag->exec();
 	}
 
+	else {
+		connected_port->setPort(QSerialPortInfo::availablePorts().at(0));
+
+		if(connected_port->open(QIODevice::ReadWrite)){
+			QMessageBox *diag = new QMessageBox;
+			diag->setText("Porta aberta com sucesso!");
+			diag->exec();
+			}
+		else {
+			QMessageBox *diag = new QMessageBox;
+			diag->setText(QString("A porta não foi aberta. Erro %1: %2")
+						  .arg(connected_port->error())
+						  .arg(connected_port->errorString()));
+			diag->exec();
+		}
+	}
 }

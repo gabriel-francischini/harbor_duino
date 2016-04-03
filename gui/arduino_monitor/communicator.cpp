@@ -4,12 +4,14 @@
 
 Communicator::Communicator(){
 	connected = false;
+	connected_port = new QSerialPort;
 	connect(connected_port, SIGNAL(readyRead()), this, SLOT(handleReadyRead()));
 	connect(connected_port, SIGNAL(error(QSerialPort::SerialPortError)),
 			this, SLOT(handleError(QSerialPort::SerialPortError)));
 	connect(&timer, SIGNAL(timeout()), SLOT(handleTimeout()));
 }
 
+Communicator::~Communicator(){}
 
 QString Communicator::execute(QString command){
 	CommunicatorParser parser(this);
@@ -22,6 +24,7 @@ void Communicator::handleReadyRead(){
 	if(!timer.isActive())
 		timer.start(10000);
 }
+
 
 void Communicator::handleError(QSerialPort::SerialPortError){
 
@@ -139,6 +142,6 @@ bool Communicator::hasPort(){
 }
 
 void Communicator::setPort(QSerialPort *port){
-	connected_port = port;
+	this->connected_port = port;
 	isPortAvailable = true;
 }

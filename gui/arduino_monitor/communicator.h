@@ -3,12 +3,15 @@
 #include <QtSerialPort/QSerialPortInfo>
 #include <qserialport.h>
 #include <QtCore>
+//#include "communicator.moc"
 
 
-class Communicator : QObject{
+class Communicator : public QObject{
 
 public:
 	Communicator();
+	~Communicator();
+
 	bool isConnected();
 	bool disconnect();
 	QString execute(QString command);
@@ -34,13 +37,15 @@ private slots:
 
 private:
 
+	Q_OBJECT
+
 	QByteArray readArray;
 	QByteArray writeArray;
 	QTimer timer;
 	qint64 bytesWritten;
 	int MaxTimeout;
 	void beConnected();
-	QSerialPort *connected_port = new QSerialPort;
+	QSerialPort *connected_port;
 	bool connected;
 	QList<QSerialPortInfo> getPortList();
 	bool isPortAvailable;

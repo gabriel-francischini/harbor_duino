@@ -31,7 +31,6 @@ public:
 	// a tela inicial, respectivamente
 	MainWindow(QWidget *parent = 0);
 	~MainWindow();
-	QSerialPort *connected_port = new QSerialPort;
 
 
 private slots:
@@ -58,6 +57,7 @@ private:
 	QMenu *optionsMenu;
 	QAction *m_connect;
 	QAction *exit;
+	QSerialPort *connected_port;
 
 };
 
