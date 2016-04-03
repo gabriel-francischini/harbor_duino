@@ -2,7 +2,7 @@
 #include "QString"
 #include "QtCore"
 
-Parser::Parser(){
+Parser::Parser(QObject *parent) : QObject(parent) {
 
 
 }

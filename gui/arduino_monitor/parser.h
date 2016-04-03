@@ -2,11 +2,14 @@
 #define PARSER_H
 #include <QtCore>
 
-class Parser{
+class Parser : public QObject{
+
+	Q_OBJECT
+
 
 public:
 
-	Parser();
+	Parser(QObject *parent = 0);
 	virtual QString execute(QString command);
 
 protected:

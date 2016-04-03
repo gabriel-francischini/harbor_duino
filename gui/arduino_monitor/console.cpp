@@ -2,8 +2,9 @@
 
 
 // Construtor do console
-Console::Console(){
+Console::Console(QWidget *parent) {
 
+	setParent(parent);
 	// Não permitir entrada de texto enquanto
 	// estiver iniciando
 	setReadOnly(true);
@@ -15,6 +16,9 @@ Console::Console(){
 
 }
 
+Console::~Console(){
+
+}
 
 
 

@@ -1,6 +1,8 @@
 #include "communicatorparser.h"
 
-CommunicatorParser::CommunicatorParser(Communicator *communicator){
+CommunicatorParser::CommunicatorParser(Communicator *communicator,
+									   QObject *parent){
+	setParent(parent);
 	this->communicator = communicator;
 	setUpKnowCommands();
 

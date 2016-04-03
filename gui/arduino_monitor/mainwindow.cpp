@@ -10,14 +10,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
 	// Cria o espaço para dispor
 	// widgets ao usuário
-	ui_area = new QWidget;
+	ui_area = new QWidget(this);
 
 	// Cria a barra de menus
 	createMenuBar();
 
 	// Cria um console
-	Console *console = new Console;
-	Communicator *communicator;
+	Console *console = new Console(this);
+	Communicator *communicator = new Communicator(this);
 	console->setCommunicator(communicator);
 
 	//connected_port = new QSerialPort(this);
@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	//communicator->setPort(connected_port);
 
 	// Cria um layout
-	QVBoxLayout *mainLayout = new QVBoxLayout;
+	QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
 
 	// Adiciona widgets ao layout
@@ -47,7 +47,7 @@ MainWindow::~MainWindow() {
 void MainWindow::createMenuBar() {
 
 	// Cria a barra de menu
-	menuBar = new QMenuBar;
+	menuBar = new QMenuBar(this);
 	// Cria o menu "Arquivo" e seus submenus
 	fileMenu = new QMenu(tr("&Arquivo"),this);
 	exit = fileMenu->addAction(tr("&Sair"));
@@ -68,9 +68,9 @@ void MainWindow::createMenuBar() {
 void MainWindow::connectTo(){
 
 
-	connected_port = new QSerialPort;
+	connected_port = new QSerialPort(this);
 	if(QSerialPortInfo::availablePorts().isEmpty()){
-		QMessageBox *diag = new QMessageBox;
+		QMessageBox *diag = new QMessageBox(this);
 		diag->setText("Não há portas disponíveis.");
 		diag->exec();
 	}
@@ -79,12 +79,12 @@ void MainWindow::connectTo(){
 		connected_port->setPort(QSerialPortInfo::availablePorts().at(0));
 
 		if(connected_port->open(QIODevice::ReadWrite)){
-			QMessageBox *diag = new QMessageBox;
+			QMessageBox *diag = new QMessageBox(this);
 			diag->setText("Porta aberta com sucesso!");
 			diag->exec();
 			}
 		else {
-			QMessageBox *diag = new QMessageBox;
+			QMessageBox *diag = new QMessageBox(this);
 			diag->setText(QString("A porta não foi aberta. Erro %1: %2")
 						  .arg(connected_port->error())
 						  .arg(connected_port->errorString()));

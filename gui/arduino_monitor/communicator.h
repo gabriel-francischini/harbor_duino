@@ -9,7 +9,7 @@
 class Communicator : public QObject{
 
 public:
-	Communicator();
+	explicit Communicator(QObject *parent = 0);
 	~Communicator();
 
 	bool isConnected();

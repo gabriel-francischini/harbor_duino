@@ -19,7 +19,8 @@ class Console : public QTextEdit{
 public:
 
 	// Construtor
-	Console();
+	explicit Console(QWidget *parent = 0);
+	~Console();
 
 	// Canais de comunicação
 	void show(QString string);

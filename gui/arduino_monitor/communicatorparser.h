@@ -7,7 +7,7 @@ class Communicator;
 
 class CommunicatorParser : public Parser{
 public:
-	CommunicatorParser(Communicator *communicator);
+	CommunicatorParser(Communicator *communicator, QObject *parent = 0);
 	QString execute(QString command);
 private:
 	Communicator *communicator;
