@@ -27,7 +27,102 @@ void Communicator::handleReadyRead(){
 }
 
 
-void Communicator::handleError(QSerialPort::SerialPortError){
+QString Communicator::handleError(QSerialPort::SerialPortError error){
+	QString header = QString("Ocorreu um erro na porta %1."
+							 "\nErro %2: ")
+						.arg(connected_port->portName())
+						.arg(connected_port->error());
+
+	switch(error)
+		case QSerialPort::NoError:{
+		//	emit portError(QSerialPort::NoError);
+		//	emit portError(QString("%1 Nenhum erro ocorreu (?).")
+		//				   .arg(header));
+			break;
+
+		case QSerialPort::DeviceNotFoundError:
+			emit portError(QSerialPort::DeviceNotFoundError);
+			emit portError(QString("%1 O erro ocoreu ao tentar se"
+								   " conectar a um dispositivo inexistente.")
+						   .arg(header));
+			break;
+		case QSerialPort::PermissionError:
+			emit portError(QSerialPort::PermissionError);
+			emit portError(QString("%1 O erro ocorreu ao tentar se"
+								   " conectar a uma porta já"
+								   " conectada por outro"
+								   " programa/processo ou o usuário não"
+								   " tem permissões e credenciais suficientes"
+								   " para conectar à porta.")
+						   .arg(header));
+			break;
+		case QSerialPort::OpenError:
+			emit portError(QSerialPort::OpenError);
+			emit portError(QString("%1 O erro ocorreu ao tentar se"
+								   " conectar a um dispositivo já conectado"
+								   " neste programa.")
+						   .arg(header));
+			break;
+		case QSerialPort::NotOpenError:
+			emit portError(QSerialPort::NotOpenError);
+			emit portError(QString("%1 O erro ocorreu ao tentar realizar"
+								   " uma operação que só pode ser realizada"
+								   " caso se esteja conectado a um dispos"
+								   "itivo. Não há nenhum dispositivo cone"
+								   "ctado.")
+						   .arg(header));
+			break;
+		case QSerialPort::WriteError:
+			emit portError(QSerialPort::WriteError);
+			emit portError(QString("%1 Um erro de entrada/saída ocorreu"
+								   " enquanto eram enviadas informações ao"
+								   " dispositivo.")
+						   .arg(header));
+			break;
+		case QSerialPort::ReadError:
+			emit portError(QSerialPort::ReadError);
+			emit portError(QString("%1 Um erro de entrada/saída ocorreu"
+								   " enquanto eram lidos sinais do disposi"
+								   "tivo.")
+						   .arg(header));
+			break;
+		case QSerialPort::ResourceError:
+			emit portError(QSerialPort::ResourceError);
+			emit portError(QString("%1 Um erro de entrada/saída ocorreu"
+								   " quando algum recurso se tornou in"
+								   "disponível, por exemplo quando o dis"
+								   "positivo é removido inesperadamente"
+								   " do sistema.")
+						   .arg(header));
+			break;
+		case QSerialPort::UnsupportedOperationError:
+			emit portError(QSerialPort::UnsupportedOperationError);
+			emit portError(QString("%1 Uma operação falhou pelo fato de"
+								   " não ser suportada/permitida"
+								   " pelo sistema operacional.")
+						   .arg(header));
+			break;
+		case QSerialPort::TimeoutError:
+			emit portError(QSerialPort::TimeoutError);
+			emit portError(QString("%1 Um erro de tempo esgotado/timeout"
+								   " ocorreu.")
+						   .arg(header));
+			break;
+		case QSerialPort::UnknownError:
+			emit portError(QSerialPort::UnknownError);
+			emit portError(QString("%1 Um erro desconhecido ocorreu.")
+						   .arg(header));
+			break;
+
+		default:
+			emit portError(QString("%1 Um erro REALMENTE desconhecido"
+								   " ocorreu.\n\t Corra para as colinas,"
+								   " Lola, corra. Corra por sua vida.")
+						   .arg(header));
+			break;
+	}
+
+return QString();
 
 }
 
@@ -59,28 +154,29 @@ QSerialPortInfo Communicator::getInfoPortByName(QString name){
 
 QString Communicator::connectTo(QString name){
 
+
+//	emit portError(QString("Essa é a vida. *cigarro*"));
 //	this->connected_port = new QSerialPort;
 	if(!isPortValid(name)) return QString("A porta \"%1\" é inválida.").arg(name);
-	//connected_port->setPort(getInfoPortByName(name));
-	this->connected_port->setPort(QSerialPortInfo::availablePorts().at(0));
+	this->connected_port->setPort(getInfoPortByName(name));
+	//this->connected_port->setPort(QSerialPortInfo::availablePorts().at(0));
 	//connected_port->setPortName("COM7");
 	//connected_port->setBaudRate(QSerialPort::Baud9600, QSerialPort::AllDirections);
 	//connected_port->setDataBits(QSerialPort::Data8);
 	//connected_port->setParity(QSerialPort::NoParity);
 	//connected_port->setStopBits(QSerialPort::OneStop);
 	//connected_port->setFlowControl(QSerialPort::NoFlowControl);
-	//if(this->connected_port->open(QIODevice::ReadWrite)){
-		//beConnected();
-		//return QString(QString("Conectado à porta %1, na velocidade de "
-		//				  "%2 bytes por segundo, com %3 bits de informação.")
-		//			   .arg(connected_port->portName()).arg(connected_port->
-		//				baudRate()).arg(connected_port->dataBits()));
-	//	}
-	//else return QString("Erro ao tentar abrir a porta %1.")
-	//		.arg(connected_port->portName());
+	if(this->connected_port->open(QIODevice::ReadWrite)){
+		beConnected();
+		return QString(QString("Conectado à porta %1, na velocidade de "
+						  "%2 bytes por segundo, com %3 bits de informação.")
+					   .arg(connected_port->portName()).arg(connected_port->
+						baudRate()).arg(connected_port->dataBits()));
+		}
 
-	return QString("Comando desativado por questões técnicas."
-				   "Utilize a interface gráfica para esta função.");
+	else return QString("");
+
+	return QString("Comportamento inesperado.");
 }
 
 void Communicator::beConnected(){

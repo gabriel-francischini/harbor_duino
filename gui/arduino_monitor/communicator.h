@@ -1,12 +1,19 @@
 #ifndef COMMUNICATOR_H
 #define COMMUNICATOR_H
+
+
+// Bibliotecas necessárias
 #include <QtSerialPort/QSerialPortInfo>
 #include <qserialport.h>
 #include <QtCore>
-//#include "communicator.moc"
 
 
+
+// Esse é o comunicador, responsável
+// pela interação direta com o harbor_duino
 class Communicator : public QObject{
+
+	Q_OBJECT
 
 public:
 	explicit Communicator(QObject *parent = 0);
@@ -30,14 +37,17 @@ public:
 	bool hasPort();
 	void setPort(QSerialPort *port);
 
+signals:
+	void portError(QString error);
+	void portError(QSerialPort::SerialPortError error);
+
+
 private slots:
 	void handleReadyRead();
-	void handleError(QSerialPort::SerialPortError error);
+	QString handleError(QSerialPort::SerialPortError error);
 	void handleTimeout();
 
 private:
-
-	Q_OBJECT
 
 	QByteArray readArray;
 	QByteArray writeArray;

@@ -1,7 +1,6 @@
 #include "mainwindow.h"
-#include "console.h"
 
-// Construtor da janela principal
+// Janela principal e início do programa
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
 
@@ -15,14 +14,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	// Cria a barra de menus
 	createMenuBar();
 
-	// Cria um console
-	Console *console = new Console(this);
-	Communicator *communicator = new Communicator(this);
-	console->setCommunicator(communicator);
+	// Cria o console
+	// O console é basicamente o local principal
+	// onde pode-se interagir diretamente com o programa,
+	// sem recorrer à interface gráficas
+	console = new Console(this);
 
-	//connected_port = new QSerialPort(this);
-	//connected_port = new QSerialPort(this);
-	//communicator->setPort(connected_port);
+
+	// Cria o comunicador
+	// O Comunicador é basicamente a parte do programa responsável
+	// por se comunicar com o harbor_duino nas suas mais variadas
+	// formas
+	communicator = new Communicator(this);
+	console->setCommunicator(communicator);
 
 	// Cria um layout
 	QVBoxLayout *mainLayout = new QVBoxLayout(this);
@@ -32,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	mainLayout->setMenuBar(menuBar);
 	mainLayout->addWidget(console);
 
+	// Conecta os diferentes componentes do programa
+	setSignalsAndSlots();
+
 	// Define a ui_area como widget central
 	// e aplica um layout a ela
 	setCentralWidget(ui_area);
@@ -39,32 +46,57 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 }
 
 // Destrutor
-MainWindow::~MainWindow() {
-
-}
+MainWindow::~MainWindow() {}
 
 // Função para criar a barra de menus
 void MainWindow::createMenuBar() {
 
 	// Cria a barra de menu
+	// ela é "filha" da janela principal
 	menuBar = new QMenuBar(this);
-	// Cria o menu "Arquivo" e seus submenus
+
+	// Cria o menu "Arquivo" e suas ações
+	// o menu "arquivo" também é filho da janela principal
 	fileMenu = new QMenu(tr("&Arquivo"),this);
 	exit = fileMenu->addAction(tr("&Sair"));
 
-	// Adiciona os menus à barra de menus
-	menuBar->addMenu(fileMenu);
-
+	// Cria o menu "Opções" com suas ações
+	// este menu também é hierarquicamente abaixo da
+	// janela principal
 	optionsMenu = new QMenu(tr("&Opções"), this);
 	m_connect = optionsMenu->addAction(tr("&Conectar"));
+
+
+	// Adiciona os menus à barra de menus
+	menuBar->addMenu(fileMenu);
 	menuBar->addMenu(optionsMenu);
+
+
+}
+
+
+// Função responsáveis por conectar os diferentes
+// sinais e os diferentes slots.
+// Quando um sinal é emito por alguma parte do programa,
+// outras partes podem realizar alguma atividade (uma função "slot")
+// baseando-se no tipo de sinal emitido e as informações
+// contidas no sinal.
+void MainWindow::setSignalsAndSlots(){
 
 	// Adiciona uma ação caso seja clicado em "Sair"
 	connect(exit, SIGNAL(triggered()), this, SLOT(close()));
 	connect(m_connect, SIGNAL(triggered()), this, SLOT(connectTo()));
 
+
+	// Dá ao comunicador uma forma de manusear o console
+	connect(communicator, SIGNAL(portError(QString)),
+			console, SLOT(external_show(QString)));
+
 }
 
+
+
+// Essa é uma funcionalidade temporária
 void MainWindow::connectTo(){
 
 
@@ -85,7 +117,7 @@ void MainWindow::connectTo(){
 			}
 		else {
 			QMessageBox *diag = new QMessageBox(this);
-			diag->setText(QString("A porta não foi aberta. Erro %1: %2")
+			diag->setText(QString("A porta não foi aberta.\n Erro %1: %2")
 						  .arg(connected_port->error())
 						  .arg(connected_port->errorString()));
 			diag->exec();

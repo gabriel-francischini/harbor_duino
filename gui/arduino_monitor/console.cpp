@@ -4,14 +4,23 @@
 // Construtor do console
 Console::Console(QWidget *parent) {
 
+	// Define que o console é "filho" de quem o criou
 	setParent(parent);
+
 	// Não permitir entrada de texto enquanto
 	// estiver iniciando
 	setReadOnly(true);
+
+	// Define a lista de comandos aceitos ou não
 	setUpCommands();
+
+	// Inicia o console propriamente
 	setUp();
+
+	// Mostra a mensagem inicial
 	greetings();
-	comm_online = false;
+
+	// Voltar a permitir a entrada de texto
 	setReadOnly(false);
 
 }
@@ -35,7 +44,7 @@ void Console::setUp(){
 	setCurrentFont(QFont("Consolas", cursor_value));
 
 	// Cria uma paleta e guarda as cores
-	// que tornam o console mais amigável
+	// que tornam o console mais "amigável"
 	QPalette colors = this->palette();
 	colors.setColor(QPalette::Base, Qt::black);
 	colors.setColor(QPalette::Text, Qt::green);
@@ -56,14 +65,80 @@ void Console::setUp(){
 }
 
 
-
+// Função slot responsável por mostrar
+// textos na interface do console
 void Console::show(QString string){
-	setReadOnly(true);
-	append(string.prepend("  "));
-	append(awaiting);
-	setReadOnly(false);
+
+	// Impede a digitação enquanto edita o console
+	this->setReadOnly(true);
+
+	// Adiciona uma identação antes do texto a ser mostrado
+	this->insertPlainText(string.prepend("  "));
+
+	this->append(awaiting);
+
+	// Volta a permitir a digitação
+	this->setReadOnly(false);
+	return;
 }
 
+void Console::external_show(QString string){
+
+	// Impede a digitação enquanto edita o console
+	this->setReadOnly(true);
+
+	// Obtem o texto total do console
+	// (o log e a linha atual)
+	QString text = this->toPlainText();
+
+	if(text.endsWith(QChar('\n'), Qt::CaseInsensitive) ||
+	   text.endsWith(QChar('\r'), Qt::CaseInsensitive) ||
+	   text.endsWith(QChar('\t'), Qt::CaseInsensitive) ||
+	   text.endsWith(QChar('\v'), Qt::CaseInsensitive) ||
+	   text.endsWith(QChar('\0'), Qt::CaseInsensitive)  ){
+
+		// Adiciona uma identação antes do texto a ser mostrado
+		// e em seguida o adiciona ao texto atual
+		this->append(string.prepend("  "));
+
+	}
+	else {
+		// Descobre onde está localizada a linha
+		// onde o usuário pode entrar comandos
+		int last_line = text.lastIndexOf(QString("\n").append(awaiting));
+
+		// Já que ao mudar o texto o cursor atual
+		// também é modificado, é necessário saber o
+		// estado do cursor anterior à mudança
+		QTextCursor cursor = this->textCursor();
+		int cursor_position = this->textCursor().position();
+
+		// Adiciona uma identação anterior e
+		// uma nova linha posterior à mensagem
+		// e em seguida a adiciona ao texto entre
+		// a linha do usuário e a anterior
+		text = text.insert(last_line, string.prepend("\n  ").append("\n"));
+
+		// Define que o texto do console
+		// passará a ser esse novo texto
+		this->setText(text);
+
+		// Define onde o cursor deveria estar
+		// e o coloca no seu lugar natural
+		cursor_position += string.length();
+		cursor.setPosition(cursor_position, QTextCursor::MoveAnchor);
+		this->setTextCursor(cursor);
+	}
+
+
+		// Volta a permitir a digitação
+		this->setReadOnly(false);
+		return;
+
+}
+
+// Função responsável por adicionar
+// o cursor de inatividade
 void Console::showAwaiting(){
 	setReadOnly(true);
 	insertPlainText(awaiting);
@@ -71,8 +146,9 @@ void Console::showAwaiting(){
 }
 
 
+// Mensagem de boas-vindas
 void Console::greetings(){
-	show(tr("Iniciando o terminal..."));
+	show(tr("Iniciando o terminal...\n"));
 }
 
 
@@ -141,30 +217,29 @@ void Console::keyPressEvent(QKeyEvent *key){
 			case 8:
 			case 9:
 			case 10:
-				if (comm_online) show(tr("Ligado\n"));
-				else show(tr("Desligado\n"));
+				show(tr("Ligado"));
 				break;
 			case 11:
 				clear();
 				setReadOnly(true);
 				break;
 			default:
-				if (comm_online)
-					show(communicator->execute(last_command));
-				else
-					show(tr("Comando desconhecido.\n"));
+				append("");
+				show(communicator->execute(last_command));
 				break;
 		}
 		return;
 	}
 
 	// Se não for nenhum dos casos anteriores,
-	// siga o procedimento padrão
+	// siga o procedimento padrão de aceitar
+	// a entrada como se fosse um texto
 	QTextEdit::keyPressEvent(key);
 
 }
 
 
+// Define os comandos conhecidos
 void Console::setUpCommands(){
 	implemented_commands
 			<< "limpar terminal" // 0
@@ -186,19 +261,14 @@ void Console::setUpCommands(){
 
 void Console::setCommunicator(Communicator *communicator){
 	this->communicator = communicator;
-	comm_online = true;
 }
 
 
 bool Console::isCommOnline(){
-	return comm_online;
+	return true;
 }
 
 
 Communicator* Console::getCommunicator(){
 	return communicator;
 };
-
-void Console::unsetCommunicator(){
-	comm_online = false;
-}

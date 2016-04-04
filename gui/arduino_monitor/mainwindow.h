@@ -1,11 +1,16 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+
+// Bibliotecas necessárias
 #include <QMainWindow>
 #include <QtCore>
 #include <QtWidgets>
 #include <QSerialPort>
+#include "console.h"
 
+// Classes que serão usadas e precisam ser
+// declaradas previamente
 QT_BEGIN_NAMESPACE
 class QAction;
 class QDialogButtonBox;
@@ -16,6 +21,8 @@ class QMenu;
 class QMenuBar;
 class QPushButton;
 class QTextEdit;
+class Console;
+class Communicator;
 QT_END_NAMESPACE
 
 
@@ -41,6 +48,10 @@ private:
 	// Função para criar a barra de menus, no topo
 	void createMenuBar();
 
+	// Função por conectar os diferentes
+	// componentes do programa
+	void setSignalsAndSlots();
+
 
 	// ui_area corresponde à area que o
 	// programa pode dispor widgets para o usuário
@@ -57,6 +68,12 @@ private:
 	QMenu *optionsMenu;
 	QAction *m_connect;
 	QAction *exit;
+
+
+	// Componentes não tão vísiveis, mas importantes,
+	// da janela principal
+	Console *console;
+	Communicator *communicator;
 	QSerialPort *connected_port;
 
 };
