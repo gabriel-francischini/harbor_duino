@@ -1,6 +1,7 @@
 #include "communicator.h"
 #include <QTextStream>
 #include "communicatorparser.h"
+#include "mainwindow.h"
 
 Communicator::Communicator(QObject *parent){
 	setParent(parent);
@@ -21,6 +22,16 @@ QString Communicator::execute(QString command){
 
 void Communicator::handleReadyRead(){
 	readArray.append(connected_port->readAll());
+
+	QString data_string;
+
+	foreach(char data, readArray){
+	data_string.append(data);
+	}
+
+	data_string.append("");
+
+	emit dataReceived(data_string);
 
 	if(!timer.isActive())
 		timer.start(10000);
@@ -168,10 +179,11 @@ QString Communicator::connectTo(QString name){
 	//connected_port->setFlowControl(QSerialPort::NoFlowControl);
 	if(this->connected_port->open(QIODevice::ReadWrite)){
 		beConnected();
-		return QString(QString("Conectado à porta %1, na velocidade de "
+		QString message =QString("Conectado à porta %1, na velocidade de "
 						  "%2 bytes por segundo, com %3 bits de informação.")
 					   .arg(connected_port->portName()).arg(connected_port->
-						baudRate()).arg(connected_port->dataBits()));
+						baudRate()).arg(connected_port->dataBits());
+		return message;
 		}
 
 	else return QString("");

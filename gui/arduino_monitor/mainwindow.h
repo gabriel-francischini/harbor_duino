@@ -31,6 +31,7 @@ class MainWindow : public QMainWindow
 {
 	Q_OBJECT
 
+
 public:
 
 	// Construtor e destrutor, que são
@@ -38,10 +39,11 @@ public:
 	// a tela inicial, respectivamente
 	MainWindow(QWidget *parent = 0);
 	~MainWindow();
+	enum ErrorOnConnection {Error, NoError};
 
 
 private slots:
-	void connectTo();
+	void connectTo(QString error = 0);
 
 private:
 
@@ -75,6 +77,7 @@ private:
 	Console *console;
 	Communicator *communicator;
 	QSerialPort *connected_port;
+
 
 };
 

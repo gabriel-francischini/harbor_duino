@@ -6,6 +6,7 @@
 #include <QtSerialPort/QSerialPortInfo>
 #include <qserialport.h>
 #include <QtCore>
+#include "mainwindow.h"
 
 
 
@@ -40,6 +41,7 @@ public:
 signals:
 	void portError(QString error);
 	void portError(QSerialPort::SerialPortError error);
+	void dataReceived(QString data);
 
 
 private slots:

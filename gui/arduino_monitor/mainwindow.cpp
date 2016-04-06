@@ -91,36 +91,45 @@ void MainWindow::setSignalsAndSlots(){
 	// Dá ao comunicador uma forma de manusear o console
 	connect(communicator, SIGNAL(portError(QString)),
 			console, SLOT(external_show(QString)));
+	// connect(communicator, SIGNAL(dataReceived(QString)),
+	//		console, SLOT(external_show(QString)));
+	connect(communicator, SIGNAL(portError(QString)),
+			this, SLOT(connectTo(QString)));
 
 }
 
 
 
 // Essa é uma funcionalidade temporária
-void MainWindow::connectTo(){
+void MainWindow::connectTo(QString error){
 
+	if(error == ""){
+		if(QSerialPortInfo::availablePorts().isEmpty()){
+			QMessageBox *diag = new QMessageBox(this);
+			diag->setText("Não há portas disponíveis.");
+			diag->exec();
+		}
 
-	connected_port = new QSerialPort(this);
-	if(QSerialPortInfo::availablePorts().isEmpty()){
-		QMessageBox *diag = new QMessageBox(this);
-		diag->setText("Não há portas disponíveis.");
-		diag->exec();
+		else {
+				QMessageBox *diag = new QMessageBox(this);
+				QString message = communicator->connectTo(
+								  (QSerialPortInfo::availablePorts()
+								   .at(0)).portName());
+
+				if(message == "") message = error;
+
+				if(message.isEmpty() || message == "");
+				else {
+					diag->setText(message);
+					diag->exec();
+				}
+		}
 	}
 
 	else {
-		connected_port->setPort(QSerialPortInfo::availablePorts().at(0));
-
-		if(connected_port->open(QIODevice::ReadWrite)){
-			QMessageBox *diag = new QMessageBox(this);
-			diag->setText("Porta aberta com sucesso!");
-			diag->exec();
-			}
-		else {
-			QMessageBox *diag = new QMessageBox(this);
-			diag->setText(QString("A porta não foi aberta.\n Erro %1: %2")
-						  .arg(connected_port->error())
-						  .arg(connected_port->errorString()));
-			diag->exec();
-		}
+		QMessageBox *diag = new QMessageBox(this);
+		diag->setText(error);
+		diag->exec();
 	}
+
 }
