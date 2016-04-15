@@ -35,6 +35,8 @@ void Communicator::handleReadyRead(){
 
 	if(!timer.isActive())
 		timer.start(10000);
+
+	readArray.clear();
 }
 
 

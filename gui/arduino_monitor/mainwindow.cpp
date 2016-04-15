@@ -91,8 +91,8 @@ void MainWindow::setSignalsAndSlots(){
 	// Dá ao comunicador uma forma de manusear o console
 	connect(communicator, SIGNAL(portError(QString)),
 			console, SLOT(external_show(QString)));
-	// connect(communicator, SIGNAL(dataReceived(QString)),
-	//		console, SLOT(external_show(QString)));
+	 connect(communicator, SIGNAL(dataReceived(QString)),
+			console, SLOT(external_show(QString)));
 	connect(communicator, SIGNAL(portError(QString)),
 			this, SLOT(connectTo(QString)));
 
