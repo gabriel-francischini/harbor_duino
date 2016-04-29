@@ -65,7 +65,9 @@ void MainWindow::createMenuBar() {
 	// janela principal
 	optionsMenu = new QMenu(tr("&Opções"), this);
 	m_connect = new QMenu(this);
+	m_connect->setTitle(tr("&Conectar a "));
 	optionsMenu->addMenu(m_connect);
+	m_disconnect = optionsMenu->addAction(tr("Desconectar"));
 
 
 	// Adiciona os menus à barra de menus
@@ -86,8 +88,6 @@ void MainWindow::setSignalsAndSlots(){
 
 	// Adiciona uma ação caso seja clicado em "Sair"
 	connect(exit, SIGNAL(triggered()), this, SLOT(close()));
-	connect(m_connect, SIGNAL(triggered()), this, SLOT(connectTo()));
-
 
 	// Dá ao comunicador uma forma de manusear o console
 	connect(communicator, SIGNAL(portError(QString)),
@@ -96,14 +96,43 @@ void MainWindow::setSignalsAndSlots(){
 			console, SLOT(external_show(QString)));
 	connect(communicator, SIGNAL(portError(QString)),
 			this, SLOT(connectTo(QString)));
-
+	connect(m_connect, SIGNAL(aboutToShow()), this, SLOT(generatePortList()));
+	connect(m_disconnect, SIGNAL(triggered(bool)), communicator, SLOT(disconnect()));
 }
 
 
 
-// Essa é uma funcionalidade temporária
-void MainWindow::connectTo(QString error){
+void MainWindow::generatePortList(){
+	portlist = new QList<QAction>;
+	signalMapper = new QSignalMapper;
 
+	QList<QSerialPortInfo> portslist = QSerialPortInfo::availablePorts();
+	QStringList nameslist;
+	foreach(const QSerialPortInfo &portinfo, portslist){
+		QAction *action = new QAction(this);
+		QString text = QString("%1 (%2)").arg(portinfo.description())
+										.arg(portinfo.portName());
+		action->setText(text);
+		connect(action, SIGNAL(triggered(bool)), signalMapper, SLOT(map()));
+		signalMapper->setMapping(action, portinfo.portName());
+		m_connect->clear();
+		m_connect->addAction(action);
+	}
+
+	connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(connectToBridge(QString)));
+
+}
+
+void MainWindow::connectToBridge(QString portName){
+	QSerialPortInfo port = communicator->getInfoPortByName(portName);
+	connectTo(QString(), port);
+}
+
+
+// Essa é uma funcionalidade temporária
+void MainWindow::connectTo(QString error, QSerialPortInfo port){
+
+	QSerialPortInfo porta = (QSerialPortInfo) port;
 	if(error == ""){
 		if(QSerialPortInfo::availablePorts().isEmpty()){
 			QMessageBox *diag = new QMessageBox(this);
@@ -111,11 +140,10 @@ void MainWindow::connectTo(QString error){
 			diag->exec();
 		}
 
-		else {
+		else if(porta.isValid()) {
 				QMessageBox *diag = new QMessageBox(this);
 				QString message = communicator->connectTo(
-								  (QSerialPortInfo::availablePorts()
-								   .at(0)).portName());
+								  (porta.portName()));
 
 				if(message == "") message = error;
 
@@ -134,3 +162,4 @@ void MainWindow::connectTo(QString error){
 	}
 
 }
+

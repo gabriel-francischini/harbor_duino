@@ -43,7 +43,9 @@ public:
 
 
 private slots:
-	void connectTo(QString error = 0);
+	void connectTo(QString error = 0, QSerialPortInfo port = QSerialPortInfo::availablePorts().first());
+	void connectToBridge(QString portName);
+	void generatePortList();
 
 private:
 
@@ -69,6 +71,7 @@ private:
 	QMenu *fileMenu;
 	QMenu *optionsMenu;
 	QMenu *m_connect;
+	QAction *m_disconnect;
 	QAction *exit;
 
 
@@ -76,9 +79,11 @@ private:
 	// da janela principal
 	Console *console;
 	Communicator *communicator;
-	QSerialPort *connected_port;
+	QSerialPortInfo *connected_port;
 
 
+	QList<QAction> *portlist;
+	QSignalMapper *signalMapper;
 };
 
 #endif // MAINWINDOW_H

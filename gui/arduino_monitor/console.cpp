@@ -212,7 +212,7 @@ void Console::keyPressEvent(QKeyEvent *key){
 			case 0:
 			case 12:
 				clear();
-				showAwaiting();
+				show(QString(""));
 				break;
 			case 8:
 			case 9:

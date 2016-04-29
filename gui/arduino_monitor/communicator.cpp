@@ -26,7 +26,8 @@ void Communicator::handleReadyRead(){
 	QString data_string;
 
 	foreach(char data, readArray){
-	data_string.append(data);
+	data_string.append(QString().setNum(data, 16));
+	data_string.append("");
 	}
 
 	data_string.append("");
@@ -255,4 +256,10 @@ bool Communicator::hasPort(){
 void Communicator::setPort(QSerialPort *port){
 	this->connected_port = port;
 	isPortAvailable = true;
+}
+
+bool Communicator::disconnect(){
+	connected_port->close();
+	emit disconnected();
+	return true;
 }

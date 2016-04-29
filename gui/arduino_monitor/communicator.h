@@ -21,7 +21,7 @@ public:
 	~Communicator();
 
 	bool isConnected();
-	bool disconnect();
+
 	QString execute(QString command);
 
 	QStringList getNamePorts();
@@ -42,7 +42,10 @@ signals:
 	void portError(QString error);
 	void portError(QSerialPort::SerialPortError error);
 	void dataReceived(QString data);
+	void disconnected();
 
+public slots:
+	bool disconnect();
 
 private slots:
 	void handleReadyRead();
