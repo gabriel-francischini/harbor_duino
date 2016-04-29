@@ -22,11 +22,10 @@ QString Communicator::execute(QString command){
 
 void Communicator::handleReadyRead(){
 	readArray.append(connected_port->readAll());
-
 	QString data_string;
 
 	foreach(char data, readArray){
-	data_string.append(QString().setNum(data, 16));
+	data_string.append(QString().setNum((unsigned byte) data));
 	data_string.append("");
 	}
 
@@ -262,4 +261,10 @@ bool Communicator::disconnect(){
 	connected_port->close();
 	emit disconnected();
 	return true;
+}
+
+void Communicator::write(byte data){
+	char _data = data;
+	connected_port->write(&_data, 1);
+	connected_port->waitForBytesWritten(100);
 }

@@ -38,6 +38,8 @@ public:
 	bool hasPort();
 	void setPort(QSerialPort *port);
 
+	enum n_base {BIN, OCT, DEC, HEX};
+
 signals:
 	void portError(QString error);
 	void portError(QSerialPort::SerialPortError error);
@@ -46,6 +48,8 @@ signals:
 
 public slots:
 	bool disconnect();
+	void write(byte data);
+
 
 private slots:
 	void handleReadyRead();

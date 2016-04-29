@@ -117,7 +117,7 @@ void Console::external_show(QString string){
 		// uma nova linha posterior à mensagem
 		// e em seguida a adiciona ao texto entre
 		// a linha do usuário e a anterior
-		text = text.insert(last_line, string.prepend("\n  ").append("\n"));
+		text = text.insert(last_line, string.prepend("  ").append("\n"));
 
 		// Define que o texto do console
 		// passará a ser esse novo texto
