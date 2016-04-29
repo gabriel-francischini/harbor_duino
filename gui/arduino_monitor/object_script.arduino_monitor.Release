@@ -1,0 +1,13 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\console.o
+./release\communicator.o
+./release\parser.o
+./release\communicatorparser.o
+./release\arduino_monitor_plugin_import.o
+./release\moc_mainwindow.o
+./release\moc_console.o
+./release\moc_communicator.o
+./release\moc_parser.o
+);

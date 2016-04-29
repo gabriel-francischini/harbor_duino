@@ -68,7 +68,7 @@ private:
 	// barra de menu
 	QMenu *fileMenu;
 	QMenu *optionsMenu;
-	QAction *m_connect;
+	QMenu *m_connect;
 	QAction *exit;
 
 

@@ -64,7 +64,8 @@ void MainWindow::createMenuBar() {
 	// este menu também é hierarquicamente abaixo da
 	// janela principal
 	optionsMenu = new QMenu(tr("&Opções"), this);
-	m_connect = optionsMenu->addAction(tr("&Conectar"));
+	m_connect = new QMenu(this);
+	optionsMenu->addMenu(m_connect);
 
 
 	// Adiciona os menus à barra de menus

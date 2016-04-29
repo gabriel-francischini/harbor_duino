@@ -1,0 +1,13 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\console.o
+./debug\communicator.o
+./debug\parser.o
+./debug\communicatorparser.o
+./debug\arduino_monitor_plugin_import.o
+./debug\moc_mainwindow.o
+./debug\moc_console.o
+./debug\moc_communicator.o
+./debug\moc_parser.o
+);
