@@ -1,0 +1,91 @@
+\hypertarget{transmissor_8cpp}{}\section{Referência do Arquivo transmissor.\+cpp}
+\label{transmissor_8cpp}\index{transmissor.\+cpp@{transmissor.\+cpp}}
+{\ttfamily \#include \char`\"{}Arduino.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}transmissor.\+h\char`\"{}}\\*
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{transmissor_8cpp_a8a63ed022719bcbdcf41e52b8b1cb257}{enviar} (int informacao)
+\begin{DoxyCompactList}\small\item\em Envia uma informação para o servidor central. \end{DoxyCompactList}\item 
+void \hyperlink{transmissor_8cpp_a212d451aed5e722a828eea05354a65dd}{iniciar\+Transmissao} (void)
+\begin{DoxyCompactList}\small\item\em Função para abrir a comunicação de porta serial. \end{DoxyCompactList}\item 
+void \hyperlink{transmissor_8cpp_aa6395bb91da0b41d1c3fcfaaf958506c}{processar\+Transmissao} (void)
+\begin{DoxyCompactList}\small\item\em Impede a parada da comunicação em longos cálculos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+byte \hyperlink{transmissor_8cpp_a280ba4820d212520673d5ffea324df32}{t\+\_\+\+\_\+buffer} \mbox{[}80\mbox{]}
+\begin{DoxyCompactList}\small\item\em Buffer para funcionamento interno da comunicação. \end{DoxyCompactList}\item 
+byte \hyperlink{transmissor_8cpp_a7186326b64a42f2f8e4410c0a41dd298}{t\+\_\+\+\_\+indice}
+\begin{DoxyCompactList}\small\item\em Índice para funcionamento interno da comunicação. \end{DoxyCompactList}\item 
+byte $\ast$ \hyperlink{transmissor_8cpp_a8fa3301606bb548ab6a8734f3084d523}{t\+\_\+p\+\_\+buffer}
+\begin{DoxyCompactList}\small\item\em Ponteiro para funcionamento interno do buffer de comunicação. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Arquivo responsável pela implementação de códigos de comunicação. Compõe-\/se basicamente de uma série de funções e seus algoritmos, relativos à comunição. 
+
+\subsection{Funções}
+\index{transmissor.\+cpp@{transmissor.\+cpp}!enviar@{enviar}}
+\index{enviar@{enviar}!transmissor.\+cpp@{transmissor.\+cpp}}
+\subsubsection[{\texorpdfstring{enviar(int informacao)}{enviar(int informacao)}}]{\setlength{\rightskip}{0pt plus 5cm}void enviar (
+\begin{DoxyParamCaption}
+\item[{int}]{informacao}
+\end{DoxyParamCaption}
+)}\hypertarget{transmissor_8cpp_a8a63ed022719bcbdcf41e52b8b1cb257}{}\label{transmissor_8cpp_a8a63ed022719bcbdcf41e52b8b1cb257}
+
+
+Envia uma informação para o servidor central. 
+
+Envia o valor inteiro informacao via serial. 
+\begin{DoxyParams}{Parâmetros}
+{\em informacao} & inteiro a ser enviado. \\
+\hline
+\end{DoxyParams}
+\index{transmissor.\+cpp@{transmissor.\+cpp}!iniciar\+Transmissao@{iniciar\+Transmissao}}
+\index{iniciar\+Transmissao@{iniciar\+Transmissao}!transmissor.\+cpp@{transmissor.\+cpp}}
+\subsubsection[{\texorpdfstring{iniciar\+Transmissao(void)}{iniciarTransmissao(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void iniciar\+Transmissao (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{transmissor_8cpp_a212d451aed5e722a828eea05354a65dd}{}\label{transmissor_8cpp_a212d451aed5e722a828eea05354a65dd}
+
+
+Função para abrir a comunicação de porta serial. 
+
+Basicamente, esta função abre a comunicação com a porta serial numa velocidade de 9600 bits por segundo, define as variáveis e outros itens necessários ao uso da comunicação serial e retorna. \index{transmissor.\+cpp@{transmissor.\+cpp}!processar\+Transmissao@{processar\+Transmissao}}
+\index{processar\+Transmissao@{processar\+Transmissao}!transmissor.\+cpp@{transmissor.\+cpp}}
+\subsubsection[{\texorpdfstring{processar\+Transmissao(void)}{processarTransmissao(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void processar\+Transmissao (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{transmissor_8cpp_aa6395bb91da0b41d1c3fcfaaf958506c}{}\label{transmissor_8cpp_aa6395bb91da0b41d1c3fcfaaf958506c}
+
+
+Impede a parada da comunicação em longos cálculos. 
+
+O seu maior uso é para momentos onde um grande loop tem que ser executado, onde poderia haver uma demora maior na comunicação, eventualmente levando a algum prejuízo. 
+
+\subsection{Variáveis}
+\index{transmissor.\+cpp@{transmissor.\+cpp}!t\+\_\+\+\_\+buffer@{t\+\_\+\+\_\+buffer}}
+\index{t\+\_\+\+\_\+buffer@{t\+\_\+\+\_\+buffer}!transmissor.\+cpp@{transmissor.\+cpp}}
+\subsubsection[{\texorpdfstring{t\+\_\+\+\_\+buffer}{t__buffer}}]{\setlength{\rightskip}{0pt plus 5cm}byte t\+\_\+\+\_\+buffer\mbox{[}80\mbox{]}}\hypertarget{transmissor_8cpp_a280ba4820d212520673d5ffea324df32}{}\label{transmissor_8cpp_a280ba4820d212520673d5ffea324df32}
+
+
+Buffer para funcionamento interno da comunicação. 
+
+Este buffer guarda os últimos bytes recebidos, a fim de interpretá-\/los. Seu valor representa uma das limitações para a comunicação com o servidor. Não há limites para o envio de informações. \index{transmissor.\+cpp@{transmissor.\+cpp}!t\+\_\+\+\_\+indice@{t\+\_\+\+\_\+indice}}
+\index{t\+\_\+\+\_\+indice@{t\+\_\+\+\_\+indice}!transmissor.\+cpp@{transmissor.\+cpp}}
+\subsubsection[{\texorpdfstring{t\+\_\+\+\_\+indice}{t__indice}}]{\setlength{\rightskip}{0pt plus 5cm}byte t\+\_\+\+\_\+indice}\hypertarget{transmissor_8cpp_a7186326b64a42f2f8e4410c0a41dd298}{}\label{transmissor_8cpp_a7186326b64a42f2f8e4410c0a41dd298}
+
+
+Índice para funcionamento interno da comunicação. 
+
+Indica quantos bytes já foram escritos no buffer, para impedir que se acesse uma memória indevida, já que em C/\+C++ não há esse tipo de checagem. \index{transmissor.\+cpp@{transmissor.\+cpp}!t\+\_\+p\+\_\+buffer@{t\+\_\+p\+\_\+buffer}}
+\index{t\+\_\+p\+\_\+buffer@{t\+\_\+p\+\_\+buffer}!transmissor.\+cpp@{transmissor.\+cpp}}
+\subsubsection[{\texorpdfstring{t\+\_\+p\+\_\+buffer}{t_p_buffer}}]{\setlength{\rightskip}{0pt plus 5cm}byte$\ast$ t\+\_\+p\+\_\+buffer}\hypertarget{transmissor_8cpp_a8fa3301606bb548ab6a8734f3084d523}{}\label{transmissor_8cpp_a8fa3301606bb548ab6a8734f3084d523}
+
+
+Ponteiro para funcionamento interno do buffer de comunicação. 
+
+Indica o valor da próxima posição vazia disponível no buffer. 

@@ -1,0 +1,120 @@
+\hypertarget{transmissor_8h}{}\section{Referência do Arquivo transmissor.\+h}
+\label{transmissor_8h}\index{transmissor.\+h@{transmissor.\+h}}
+{\ttfamily \#include \char`\"{}Arduino.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}comm\+\_\+def.\+h\char`\"{}}\\*
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{transmissor_8h_a212d451aed5e722a828eea05354a65dd}{iniciar\+Transmissao} (void)
+\begin{DoxyCompactList}\small\item\em Função para abrir a comunicação de porta serial. \end{DoxyCompactList}\item 
+void \hyperlink{transmissor_8h_aa6395bb91da0b41d1c3fcfaaf958506c}{processar\+Transmissao} (void)
+\begin{DoxyCompactList}\small\item\em Impede a parada da comunicação em longos cálculos. \end{DoxyCompactList}\item 
+void \hyperlink{transmissor_8h_a8daa16df24637dfe37f79a2280a39b60}{\+\_\+\+\_\+processar\+Transmissao} (void)
+\begin{DoxyCompactList}\small\item\em Função interna responsável por interpretar a comunicação com o servidor. \end{DoxyCompactList}\item 
+void \hyperlink{transmissor_8h_ad5f9c231c5d0bfca07a532a716c664fa}{enviar} (byte $\ast$ponteiro)
+\begin{DoxyCompactList}\small\item\em Envia uma informação para o servidor central. \end{DoxyCompactList}\item 
+void \hyperlink{transmissor_8h_ac24d635552beb84f162ee60fa2f81d07}{gravar\+Buffer} (byte valor)
+\begin{DoxyCompactList}\small\item\em Função interna para gravar informação no buffer. \end{DoxyCompactList}\item 
+void \hyperlink{transmissor_8h_a5c61a126206d7006043da353c74559cf}{enviar} (byte $\ast$ponteiro, int tamanho)
+\begin{DoxyCompactList}\small\item\em Envia uma informação de tamanho {\ttfamily tamanho} para o servidor central. \end{DoxyCompactList}\item 
+void {\bfseries tipo\+Token} (byte $\ast$\hyperlink{comm__def_8h_a87da3d8264af1c9427605148f20dd9c4}{token})\hypertarget{transmissor_8h_a161f2ec5caf7fd6c2b93d3cb78d2e657}{}\label{transmissor_8h_a161f2ec5caf7fd6c2b93d3cb78d2e657}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Arquivo responsável pela implementação de códigos de comunicação. Compõe-\/se basicamente de uma série de funções e seus algoritmos, relativos à comunição.
+
+Biblioteca responsável pela comunicação serial com o servidor 
+
+\subsection{Funções}
+\index{transmissor.\+h@{transmissor.\+h}!\+\_\+\+\_\+processar\+Transmissao@{\+\_\+\+\_\+processar\+Transmissao}}
+\index{\+\_\+\+\_\+processar\+Transmissao@{\+\_\+\+\_\+processar\+Transmissao}!transmissor.\+h@{transmissor.\+h}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+processar\+Transmissao(void)}{__processarTransmissao(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void \+\_\+\+\_\+processar\+Transmissao (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{transmissor_8h_a8daa16df24637dfe37f79a2280a39b60}{}\label{transmissor_8h_a8daa16df24637dfe37f79a2280a39b60}
+
+
+Função interna responsável por interpretar a comunicação com o servidor. 
+
+Esta função é chamada quando uma mensagem completa é transmitida. Isto é, ela é chamada quando um Fim de Transmissão (F\+TM) acaba de ser escrito ao buffer, para que esta mensagem inteira seja interpretada e processada. É ela que define as reações do arduino para cada mensagem, e como cada valor deve ser tratado. \begin{DoxySeeAlso}{Veja também}
+\hyperlink{comm__def_8h_ab07f6dc5103dff96569dec592e93a701}{ponteiro\+Buffer}, \hyperlink{transmissor_8h_aa6395bb91da0b41d1c3fcfaaf958506c}{processar\+Transmissao}, tipo\+Token(byte $\ast$token) 
+\end{DoxySeeAlso}
+\index{transmissor.\+h@{transmissor.\+h}!enviar@{enviar}}
+\index{enviar@{enviar}!transmissor.\+h@{transmissor.\+h}}
+\subsubsection[{\texorpdfstring{enviar(byte $\ast$ponteiro)}{enviar(byte *ponteiro)}}]{\setlength{\rightskip}{0pt plus 5cm}void enviar (
+\begin{DoxyParamCaption}
+\item[{byte $\ast$}]{ponteiro}
+\end{DoxyParamCaption}
+)}\hypertarget{transmissor_8h_ad5f9c231c5d0bfca07a532a716c664fa}{}\label{transmissor_8h_ad5f9c231c5d0bfca07a532a716c664fa}
+
+
+Envia uma informação para o servidor central. 
+
+Envia o ponteiro indicado por $\ast$ponteiro para o servidor via serial. \begin{DoxySeeAlso}{Veja também}
+\hyperlink{comm__def_8h_a2c8c3cf499604f68da78d025c9bfd808}{delay\+Resposta}, \hyperlink{comm__def_8h_ad3afdac4c6c4fa0b7c640f676bda414a}{F\+TM}, \hyperlink{transmissor_8h_a5c61a126206d7006043da353c74559cf}{enviar(byte $\ast$ponteiro, int tamanho)} 
+\end{DoxySeeAlso}
+\index{transmissor.\+h@{transmissor.\+h}!enviar@{enviar}}
+\index{enviar@{enviar}!transmissor.\+h@{transmissor.\+h}}
+\subsubsection[{\texorpdfstring{enviar(byte $\ast$ponteiro, int tamanho)}{enviar(byte *ponteiro, int tamanho)}}]{\setlength{\rightskip}{0pt plus 5cm}void enviar (
+\begin{DoxyParamCaption}
+\item[{byte $\ast$}]{ponteiro, }
+\item[{int}]{tamanho}
+\end{DoxyParamCaption}
+)}\hypertarget{transmissor_8h_a5c61a126206d7006043da353c74559cf}{}\label{transmissor_8h_a5c61a126206d7006043da353c74559cf}
+
+
+Envia uma informação de tamanho {\ttfamily tamanho} para o servidor central. 
+
+Envia o ponteiro indicado por $\ast$ponteiro para o servidor via serial. \begin{DoxySeeAlso}{Veja também}
+\hyperlink{transmissor_8h_ad5f9c231c5d0bfca07a532a716c664fa}{enviar(byte $\ast$ponteiro)}, \hyperlink{comm__def_8h_a2c8c3cf499604f68da78d025c9bfd808}{delay\+Resposta} 
+\end{DoxySeeAlso}
+\index{transmissor.\+h@{transmissor.\+h}!gravar\+Buffer@{gravar\+Buffer}}
+\index{gravar\+Buffer@{gravar\+Buffer}!transmissor.\+h@{transmissor.\+h}}
+\subsubsection[{\texorpdfstring{gravar\+Buffer(byte valor)}{gravarBuffer(byte valor)}}]{\setlength{\rightskip}{0pt plus 5cm}void gravar\+Buffer (
+\begin{DoxyParamCaption}
+\item[{byte}]{valor}
+\end{DoxyParamCaption}
+)}\hypertarget{transmissor_8h_ac24d635552beb84f162ee60fa2f81d07}{}\label{transmissor_8h_ac24d635552beb84f162ee60fa2f81d07}
+
+
+Função interna para gravar informação no buffer. 
+
+Grava a informação {\ttfamily valor} no buffer de histórico de menssagem , que normalmente grava somenta as mensagens recebidas. 
+\begin{DoxyParams}{Parâmetros}
+{\em valor} & Byte a ser escrito no buffer \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{Veja também}
+\hyperlink{comm__def_8h_a61d81722405f766c1810f89c7680476b}{\+\_\+\+\_\+buffer}, \hyperlink{comm__def_8h_a7f8192a115ad4a3cca851e3a4499554a}{byte\+Atual}, \hyperlink{comm__def_8h_a120db2d94d9efed657641ea675bd1a25}{indice\+Buffer}, \hyperlink{transmissor_8h_ad5f9c231c5d0bfca07a532a716c664fa}{enviar(byte $\ast$ponteiro)} 
+\end{DoxySeeAlso}
+\index{transmissor.\+h@{transmissor.\+h}!iniciar\+Transmissao@{iniciar\+Transmissao}}
+\index{iniciar\+Transmissao@{iniciar\+Transmissao}!transmissor.\+h@{transmissor.\+h}}
+\subsubsection[{\texorpdfstring{iniciar\+Transmissao(void)}{iniciarTransmissao(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void iniciar\+Transmissao (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{transmissor_8h_a212d451aed5e722a828eea05354a65dd}{}\label{transmissor_8h_a212d451aed5e722a828eea05354a65dd}
+
+
+Função para abrir a comunicação de porta serial. 
+
+Basicamente, esta função abre a comunicação com a porta serial numa velocidade de 9600 bits por segundo, define as variáveis e outros itens necessários ao uso da comunicação serial e retorna. \begin{DoxySeeAlso}{Veja também}
+\hyperlink{transmissor_8h_aa6395bb91da0b41d1c3fcfaaf958506c}{processar\+Transmissao()}, \hyperlink{transmissor_8h_ad5f9c231c5d0bfca07a532a716c664fa}{enviar(byte $\ast$ponteiro)} 
+\end{DoxySeeAlso}
+\index{transmissor.\+h@{transmissor.\+h}!processar\+Transmissao@{processar\+Transmissao}}
+\index{processar\+Transmissao@{processar\+Transmissao}!transmissor.\+h@{transmissor.\+h}}
+\subsubsection[{\texorpdfstring{processar\+Transmissao(void)}{processarTransmissao(void)}}]{\setlength{\rightskip}{0pt plus 5cm}void processar\+Transmissao (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{transmissor_8h_aa6395bb91da0b41d1c3fcfaaf958506c}{}\label{transmissor_8h_aa6395bb91da0b41d1c3fcfaaf958506c}
+
+
+Impede a parada da comunicação em longos cálculos. 
+
+O seu maior uso é para momentos onde um grande loop tem que ser executado, onde poderia haver uma demora maior na comunicação, eventualmente levando a algum prejuízo. {\bfseries Também é incluído no loop() principal} \begin{DoxySeeAlso}{Veja também}
+\hyperlink{transmissor_8h_a212d451aed5e722a828eea05354a65dd}{iniciar\+Transmissao(void)}, \hyperlink{comm__def_8h_a263c0d72e2623ad4c47af92fb0a1b189}{M\+A\+X\+\_\+\+M\+E\+N\+S\+S\+A\+G\+EM}, \hyperlink{transmissor_8h_ac24d635552beb84f162ee60fa2f81d07}{gravar\+Buffer(byte)}, \hyperlink{transmissor_8h_a8daa16df24637dfe37f79a2280a39b60}{\+\_\+\+\_\+processar\+Transmissao(void)} 
+\end{DoxySeeAlso}

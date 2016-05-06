@@ -1,0 +1,39 @@
+\begin{theindex}
+
+  \item {enviar}
+    \subitem {transmissor.\+cpp}, \hyperpage{3}
+    \subitem {transmissor.\+h}, \hyperpage{5}
+
+  \indexspace
+
+  \item {iniciar\+Transmissao}
+    \subitem {transmissor.\+cpp}, \hyperpage{4}
+    \subitem {transmissor.\+h}, \hyperpage{6}
+
+  \indexspace
+
+  \item {processar\+Transmissao}
+    \subitem {transmissor.\+cpp}, \hyperpage{4}
+    \subitem {transmissor.\+h}, \hyperpage{6}
+
+  \indexspace
+
+  \item {t\+\_\+\+\_\+buffer}
+    \subitem {transmissor.\+cpp}, \hyperpage{4}
+  \item {t\+\_\+\+\_\+indice}
+    \subitem {transmissor.\+cpp}, \hyperpage{4}
+  \item {t\+\_\+p\+\_\+buffer}
+    \subitem {transmissor.\+cpp}, \hyperpage{4}
+  \item {transmissor.\+cpp}, \hyperpage{3}
+    \subitem {enviar}, \hyperpage{3}
+    \subitem {iniciar\+Transmissao}, \hyperpage{4}
+    \subitem {processar\+Transmissao}, \hyperpage{4}
+    \subitem {t\+\_\+\+\_\+buffer}, \hyperpage{4}
+    \subitem {t\+\_\+\+\_\+indice}, \hyperpage{4}
+    \subitem {t\+\_\+p\+\_\+buffer}, \hyperpage{4}
+  \item {transmissor.\+h}, \hyperpage{5}
+    \subitem {enviar}, \hyperpage{5}
+    \subitem {iniciar\+Transmissao}, \hyperpage{6}
+    \subitem {processar\+Transmissao}, \hyperpage{6}
+
+\end{theindex}

@@ -1,0 +1,6 @@
+A fazer: (19:41, 01/05/2016)
+
+	- Baixar o Doxygen para auto-documentação :)
+	- Resolver o problema do bit de paridade
+	- Desenvolver uma forma de obter o estado de todas as portas seriais
+	- Desenvolver uma forma de modificar o estado de todas as portas seriais

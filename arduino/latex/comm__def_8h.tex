@@ -1,0 +1,215 @@
+\hypertarget{comm__def_8h}{}\section{Referência do Arquivo comm\+\_\+def.\+h}
+\label{comm__def_8h}\index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsection*{Definições e Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{comm__def_8h_a263c0d72e2623ad4c47af92fb0a1b189}{M\+A\+X\+\_\+\+M\+E\+N\+S\+S\+A\+G\+EM}~80\hypertarget{comm__def_8h_a263c0d72e2623ad4c47af92fb0a1b189}{}\label{comm__def_8h_a263c0d72e2623ad4c47af92fb0a1b189}
+
+\begin{DoxyCompactList}\small\item\em Indica o tamanho máximo que uma mensagem inteira pode ter (em comandos) \end{DoxyCompactList}\item 
+\#define \hyperlink{comm__def_8h_abae7cdf882def602cb787bb039ff6a43}{I\+TM}~100
+\begin{DoxyCompactList}\small\item\em Marcador de início de transmissão. \end{DoxyCompactList}\item 
+\#define \hyperlink{comm__def_8h_a0e14b8db93c316988141d7f379810aa0}{I\+CB}~101
+\begin{DoxyCompactList}\small\item\em Início de Cabeçalho. \end{DoxyCompactList}\item 
+\#define \hyperlink{comm__def_8h_aaa6e6a0761757c3075903749c206913b}{I\+TX}~102
+\begin{DoxyCompactList}\small\item\em Início de Texto. \end{DoxyCompactList}\item 
+\#define \hyperlink{comm__def_8h_ac65a2ebc7528211d5724bcf448715332}{E\+MD}~103
+\begin{DoxyCompactList}\small\item\em Entrar no Modo de Dados. \end{DoxyCompactList}\item 
+\#define \hyperlink{comm__def_8h_a068104c96256f9d20b1e007abf8ea16f}{S\+MD}~104
+\begin{DoxyCompactList}\small\item\em Sair do Modo de Dados. \end{DoxyCompactList}\item 
+\#define \hyperlink{comm__def_8h_ad3afdac4c6c4fa0b7c640f676bda414a}{F\+TM}~105
+\begin{DoxyCompactList}\small\item\em Fim de Transmissão. \end{DoxyCompactList}\item 
+\#define \hyperlink{comm__def_8h_ae1a27401b7fb01ccb9a82dbddbb54eea}{P\+IN}~106
+\begin{DoxyCompactList}\small\item\em Indica o valor de um P\+I\+No. \end{DoxyCompactList}\item 
+\#define \hyperlink{comm__def_8h_ad2bc8ecdae88210d8b3dfe56fad5c647}{S\+NM}~107
+\begin{DoxyCompactList}\small\item\em Sinônimo, equivalente a, igual a. \end{DoxyCompactList}\item 
+\#define \hyperlink{comm__def_8h_a735563036dced0b7d6cc98f97ea4978b}{E\+RR}~108
+\begin{DoxyCompactList}\small\item\em Indica um erro que aconteceu e aborta o que tentou fazer. \end{DoxyCompactList}\item 
+\#define \hyperlink{comm__def_8h_a91ee00e0c517dd9bb757c3fba50e2b4a}{A\+VS}~109
+\begin{DoxyCompactList}\small\item\em Emite um aviso, como algum pequeno erro ou algo similar. \end{DoxyCompactList}\item 
+\#define \hyperlink{comm__def_8h_a7f8192a115ad4a3cca851e3a4499554a}{byte\+Atual}~(\hyperlink{comm__def_8h_ab07f6dc5103dff96569dec592e93a701}{ponteiro\+Buffer}+\hyperlink{comm__def_8h_a120db2d94d9efed657641ea675bd1a25}{indice\+Buffer})
+\begin{DoxyCompactList}\small\item\em Ponteiro que aponta para o próximo byte do buffer ainda não usado. \end{DoxyCompactList}\item 
+\#define \hyperlink{comm__def_8h_a2c8c3cf499604f68da78d025c9bfd808}{delay\+Resposta}~200
+\begin{DoxyCompactList}\small\item\em Valor em milisegundos de delay entre o envio de um byte e outro na comunicação. \end{DoxyCompactList}\item 
+\#define \hyperlink{comm__def_8h_a2e3fa5f8a470ac2835789d7e432d3401}{max\+Parametros}~20
+\begin{DoxyCompactList}\small\item\em Indica o valor máximo de parametros que um comando de comunicação pode ter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerações}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{comm__def_8h_a87da3d8264af1c9427605148f20dd9c4}{token} \{ {\bfseries C\+O\+M\+A\+N\+DO}, 
+{\bfseries V\+A\+L\+OR}, 
+{\bfseries V\+A\+R\+I\+A\+V\+EL}, 
+{\bfseries M\+A\+R\+C\+A\+D\+OR}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+byte \hyperlink{comm__def_8h_a61d81722405f766c1810f89c7680476b}{\+\_\+\+\_\+buffer} \mbox{[}\hyperlink{comm__def_8h_a263c0d72e2623ad4c47af92fb0a1b189}{M\+A\+X\+\_\+\+M\+E\+N\+S\+S\+A\+G\+EM}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Buffer para funcionamento interno da comunicação. \end{DoxyCompactList}\item 
+byte $\ast$ \hyperlink{comm__def_8h_ab07f6dc5103dff96569dec592e93a701}{ponteiro\+Buffer}
+\begin{DoxyCompactList}\small\item\em Ponteiro para funcionamento interno do buffer de comunicação. \end{DoxyCompactList}\item 
+byte \hyperlink{comm__def_8h_a120db2d94d9efed657641ea675bd1a25}{indice\+Buffer}
+\begin{DoxyCompactList}\small\item\em Índice para funcionamento interno da comunicação. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Guardas as definições de comandos partilhadas tanto pelo servidor quanto pelo arduino. É basicamente as \char`\"{}palavras\char`\"{} pelas quais ambos os lados se comunicam. 
+
+\subsection{Definições e macros}
+\index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!A\+VS@{A\+VS}}
+\index{A\+VS@{A\+VS}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{A\+VS}{AVS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+VS~109}\hypertarget{comm__def_8h_a91ee00e0c517dd9bb757c3fba50e2b4a}{}\label{comm__def_8h_a91ee00e0c517dd9bb757c3fba50e2b4a}
+
+
+Emite um aviso, como algum pequeno erro ou algo similar. 
+
+Tal \char`\"{}erro\char`\"{} deve ser algo tolerável (i.\+e. não oferece riscos ao programa ou operadores), mas é um incômodo incoveniente \index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!byte\+Atual@{byte\+Atual}}
+\index{byte\+Atual@{byte\+Atual}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{byte\+Atual}{byteAtual}}]{\setlength{\rightskip}{0pt plus 5cm}\#define byte\+Atual~({\bf ponteiro\+Buffer}+{\bf indice\+Buffer})}\hypertarget{comm__def_8h_a7f8192a115ad4a3cca851e3a4499554a}{}\label{comm__def_8h_a7f8192a115ad4a3cca851e3a4499554a}
+
+
+Ponteiro que aponta para o próximo byte do buffer ainda não usado. 
+
+O buffer é uma reunião sequencial de bytes (array de bytes). É necessário saber qual é o próximo byte não usado dentro do buffer. O valor do próximo byte não usado pode ser calculado através da seguinte fórmula\+: {\ttfamily L\+O\+C\+AL DO B\+Y\+TE = I\+NÍ\+C\+IO DO B\+U\+F\+F\+ER + B\+Y\+T\+ES JÁ U\+S\+A\+D\+OS}. O endereço da memória do início do buffer é indicado pelo {\ttfamily ponteiro\+Buffer} enquanto o {\ttfamily indice\+Buffer}marca quantos bytes já foram usados. O resultado dessa soma é o endereço da memória do byte disponível para uso (e como isso é um endereço, deve ser usado como ponteiro). \begin{DoxySeeAlso}{Veja também}
+\hyperlink{comm__def_8h_ab07f6dc5103dff96569dec592e93a701}{ponteiro\+Buffer}, \hyperlink{comm__def_8h_a120db2d94d9efed657641ea675bd1a25}{indice\+Buffer}, \hyperlink{transmissor_8h_ac24d635552beb84f162ee60fa2f81d07}{gravar\+Buffer(byte)}, \hyperlink{transmissor_8h_ad5f9c231c5d0bfca07a532a716c664fa}{enviar(byte $\ast$)} 
+\end{DoxySeeAlso}
+\index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!delay\+Resposta@{delay\+Resposta}}
+\index{delay\+Resposta@{delay\+Resposta}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{delay\+Resposta}{delayResposta}}]{\setlength{\rightskip}{0pt plus 5cm}\#define delay\+Resposta~200}\hypertarget{comm__def_8h_a2c8c3cf499604f68da78d025c9bfd808}{}\label{comm__def_8h_a2c8c3cf499604f68da78d025c9bfd808}
+
+
+Valor em milisegundos de delay entre o envio de um byte e outro na comunicação. 
+
+Esse valor é importante já que se esse valor fosse 0, vários bytes poderiam ser enviados simultâneamente, levando à perda de dados (um 0110 seguido de um 1010 poderia acidentalmente se tornar um 1111 se os 0\textquotesingle{}s forem atropelados). O valor mínimo recomendado para esta variável é 5 milisegundos, porém este valor pode variar dependendo da aplicação e dos dispositivos envolvidos. \begin{DoxySeeAlso}{Veja também}
+\hyperlink{transmissor_8h_ad5f9c231c5d0bfca07a532a716c664fa}{enviar(byte $\ast$)} 
+\end{DoxySeeAlso}
+\index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!E\+MD@{E\+MD}}
+\index{E\+MD@{E\+MD}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{E\+MD}{EMD}}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\+MD~103}\hypertarget{comm__def_8h_ac65a2ebc7528211d5724bcf448715332}{}\label{comm__def_8h_ac65a2ebc7528211d5724bcf448715332}
+
+
+Entrar no Modo de Dados. 
+
+Os valores entre E\+MD e S\+MD são considerados valores absolutos, sem qualquer interpretação. Seria como argumentos/parametros dos comandos. \index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!E\+RR@{E\+RR}}
+\index{E\+RR@{E\+RR}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{E\+RR}{ERR}}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\+RR~108}\hypertarget{comm__def_8h_a735563036dced0b7d6cc98f97ea4978b}{}\label{comm__def_8h_a735563036dced0b7d6cc98f97ea4978b}
+
+
+Indica um erro que aconteceu e aborta o que tentou fazer. 
+
+Serve para indicar que um erro severo e perigoso ocorreu (indicando qual) e desistindo de fazer o que estava fazendo antes. \index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!F\+TM@{F\+TM}}
+\index{F\+TM@{F\+TM}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{F\+TM}{FTM}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+TM~105}\hypertarget{comm__def_8h_ad3afdac4c6c4fa0b7c640f676bda414a}{}\label{comm__def_8h_ad3afdac4c6c4fa0b7c640f676bda414a}
+
+
+Fim de Transmissão. 
+
+Marca o fim de uma mensagem entre o servidor e o arduino. \index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!I\+CB@{I\+CB}}
+\index{I\+CB@{I\+CB}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{I\+CB}{ICB}}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+CB~101}\hypertarget{comm__def_8h_a0e14b8db93c316988141d7f379810aa0}{}\label{comm__def_8h_a0e14b8db93c316988141d7f379810aa0}
+
+
+Início de Cabeçalho. 
+
+É um marcador para indicar que os bytes a seguir devem ser condirados como um cabeçalho, e não como comandos \index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!I\+TM@{I\+TM}}
+\index{I\+TM@{I\+TM}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{I\+TM}{ITM}}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+TM~100}\hypertarget{comm__def_8h_abae7cdf882def602cb787bb039ff6a43}{}\label{comm__def_8h_abae7cdf882def602cb787bb039ff6a43}
+
+
+Marcador de início de transmissão. 
+
+Representa que a infomação a seguir é considerada parte da transmissão, já que existe a possibilidade de interferência do meio pelo qual é feita a comunicação. \index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!I\+TX@{I\+TX}}
+\index{I\+TX@{I\+TX}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{I\+TX}{ITX}}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+TX~102}\hypertarget{comm__def_8h_aaa6e6a0761757c3075903749c206913b}{}\label{comm__def_8h_aaa6e6a0761757c3075903749c206913b}
+
+
+Início de Texto. 
+
+Indica o fim do cabeçalho e o inicio da informação propriamente dita, como comandos e valores de variáveis \index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!max\+Parametros@{max\+Parametros}}
+\index{max\+Parametros@{max\+Parametros}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{max\+Parametros}{maxParametros}}]{\setlength{\rightskip}{0pt plus 5cm}\#define max\+Parametros~20}\hypertarget{comm__def_8h_a2e3fa5f8a470ac2835789d7e432d3401}{}\label{comm__def_8h_a2e3fa5f8a470ac2835789d7e432d3401}
+
+
+Indica o valor máximo de parametros que um comando de comunicação pode ter. 
+
+Esse valor é usado ao se intepretar uma mensagem, limitando o número de parametros que um único comando pode ter. \begin{DoxySeeAlso}{Veja também}
+\hyperlink{transmissor_8h_a8daa16df24637dfe37f79a2280a39b60}{\+\_\+\+\_\+processar\+Transmissao(void)}, tipo\+Token(byte $\ast$) 
+\end{DoxySeeAlso}
+\index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!P\+IN@{P\+IN}}
+\index{P\+IN@{P\+IN}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{P\+IN}{PIN}}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+IN~106}\hypertarget{comm__def_8h_ae1a27401b7fb01ccb9a82dbddbb54eea}{}\label{comm__def_8h_ae1a27401b7fb01ccb9a82dbddbb54eea}
+
+
+Indica o valor de um P\+I\+No. 
+
+Seguido de E\+MD (pino) S\+MD, indica que o valor absoluto a seguir representa uma das portas do arduino. \index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!S\+MD@{S\+MD}}
+\index{S\+MD@{S\+MD}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{S\+MD}{SMD}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+MD~104}\hypertarget{comm__def_8h_a068104c96256f9d20b1e007abf8ea16f}{}\label{comm__def_8h_a068104c96256f9d20b1e007abf8ea16f}
+
+
+Sair do Modo de Dados. 
+
+Indica que os próximos bytes devem ser interpretados como comandos, e não mais como valores absolutos. \index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!S\+NM@{S\+NM}}
+\index{S\+NM@{S\+NM}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{S\+NM}{SNM}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+NM~107}\hypertarget{comm__def_8h_ad2bc8ecdae88210d8b3dfe56fad5c647}{}\label{comm__def_8h_ad2bc8ecdae88210d8b3dfe56fad5c647}
+
+
+Sinônimo, equivalente a, igual a. 
+
+Indica que os dois valores a seguir (normalmente uma váriavel e um número, ou um número e uma variável) são iguais. Cada qual entre E\+MD e S\+MD, respectivamente. Exemplo\+: 
+\begin{DoxyCode}
+1 ITM ICB ITX 
+2 SNM
+3 PIN EMD 5 SMD  
+4     EMD 7 SMD 
+5 FTM 
+\end{DoxyCode}
+ Indica que o valor do pino 5 é 7. 
+
+\subsection{Enumerações}
+\index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!token@{token}}
+\index{token@{token}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{token}{token}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf token}}\hypertarget{comm__def_8h_a87da3d8264af1c9427605148f20dd9c4}{}\label{comm__def_8h_a87da3d8264af1c9427605148f20dd9c4}
+Marca os tipos de tokens existentes\+: comando, valor, variável, marcador
+
+Essa enumeração indica que um token pode ser
+\begin{DoxyItemize}
+\item um {\bfseries comando} (como {\ttfamily somar} ) ou
+\item um {\bfseries valor} (como {\ttfamily 5}) ou
+\item uma {\bfseries variável} ( como o {\ttfamily pino 5}) ou
+\item um {\bfseries marcador} (como {\ttfamily Fim de Transmissão})
+\end{DoxyItemize}
+
+Um {\itshape token} é o menor pedaço de informação que compõem as mensagens trocadas com o servidor. 
+
+\subsection{Variáveis}
+\index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!\+\_\+\+\_\+buffer@{\+\_\+\+\_\+buffer}}
+\index{\+\_\+\+\_\+buffer@{\+\_\+\+\_\+buffer}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+buffer}{__buffer}}]{\setlength{\rightskip}{0pt plus 5cm}byte \+\_\+\+\_\+buffer\mbox{[}{\bf M\+A\+X\+\_\+\+M\+E\+N\+S\+S\+A\+G\+EM}\mbox{]}}\hypertarget{comm__def_8h_a61d81722405f766c1810f89c7680476b}{}\label{comm__def_8h_a61d81722405f766c1810f89c7680476b}
+
+
+Buffer para funcionamento interno da comunicação. 
+
+Este buffer guarda os últimos bytes recebidos, a fim de interpretá-\/los. Seu valor representa uma das limitações para a comunicação com o servidor. Não há limites para o envio de informações. \begin{DoxySeeAlso}{Veja também}
+\hyperlink{transmissor_8h_ac24d635552beb84f162ee60fa2f81d07}{gravar\+Buffer(byte)}, \hyperlink{comm__def_8h_a263c0d72e2623ad4c47af92fb0a1b189}{M\+A\+X\+\_\+\+M\+E\+N\+S\+S\+A\+G\+EM} 
+\end{DoxySeeAlso}
+\index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!indice\+Buffer@{indice\+Buffer}}
+\index{indice\+Buffer@{indice\+Buffer}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{indice\+Buffer}{indiceBuffer}}]{\setlength{\rightskip}{0pt plus 5cm}byte indice\+Buffer}\hypertarget{comm__def_8h_a120db2d94d9efed657641ea675bd1a25}{}\label{comm__def_8h_a120db2d94d9efed657641ea675bd1a25}
+
+
+Índice para funcionamento interno da comunicação. 
+
+Indica quantos bytes já foram escritos no buffer, para impedir que se acesse uma memória indevida, já que em C/\+C++ não há esse tipo de checagem. \begin{DoxySeeAlso}{Veja também}
+\hyperlink{transmissor_8h_ac24d635552beb84f162ee60fa2f81d07}{gravar\+Buffer(byte)}, \hyperlink{transmissor_8h_aa6395bb91da0b41d1c3fcfaaf958506c}{processar\+Transmissao(void)}, \hyperlink{transmissor_8h_a8daa16df24637dfe37f79a2280a39b60}{\+\_\+\+\_\+processar\+Transmissao(void)}, tipo\+Token(byte $\ast$) 
+\end{DoxySeeAlso}
+\index{comm\+\_\+def.\+h@{comm\+\_\+def.\+h}!ponteiro\+Buffer@{ponteiro\+Buffer}}
+\index{ponteiro\+Buffer@{ponteiro\+Buffer}!comm\+\_\+def.\+h@{comm\+\_\+def.\+h}}
+\subsubsection[{\texorpdfstring{ponteiro\+Buffer}{ponteiroBuffer}}]{\setlength{\rightskip}{0pt plus 5cm}byte$\ast$ ponteiro\+Buffer}\hypertarget{comm__def_8h_ab07f6dc5103dff96569dec592e93a701}{}\label{comm__def_8h_ab07f6dc5103dff96569dec592e93a701}
+
+
+Ponteiro para funcionamento interno do buffer de comunicação. 
+
+Indica o endereço de memória do buffer. \begin{DoxySeeAlso}{Veja também}
+\hyperlink{comm__def_8h_a61d81722405f766c1810f89c7680476b}{\+\_\+\+\_\+buffer}, \hyperlink{transmissor_8h_ac24d635552beb84f162ee60fa2f81d07}{gravar\+Buffer(byte)}, \hyperlink{comm__def_8h_a263c0d72e2623ad4c47af92fb0a1b189}{M\+A\+X\+\_\+\+M\+E\+N\+S\+S\+A\+G\+EM} 
+\end{DoxySeeAlso}

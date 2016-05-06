@@ -1,24 +1,21 @@
+/*! \file transmissor.h Biblioteca responsável pela comunicação serial com o servidor */
+
 #ifndef __TRANSMISSAO__
 #define __TRANSMISSAO__
 
 #include "Arduino.h"
+#include "comm_def.h"
 
-// Função responsável pelo código do setUp() referente
-// à comunicação serial/wifi
-void iniciarTransmissao();
-
-
-void processarTransmissao();
-void __processarTransmissao();
-void enviar(int informacao);
-
-
-// Tabela de comandos
-#define IT 100 // Início de Transmissão
-#define IC 101 // Início de Cabeçalho
-#define ITex 102 // Início de Texto
-#define MD 103 // Modo de Dados
-#define RMD 104 // Retorno do Modo de Dados ao modo normal
-#define FT 105 // Fim de Transmissão
-
+void iniciarTransmissao(void);
+void processarTransmissao(void);
+void __processarTransmissao(void);
+void enviar(byte *ponteiro);
+void gravarBuffer(byte valor);
+void enviar(byte *ponteiro, int tamanho);
+token tipoToken(byte *Token);
+void executar(byte *inicio, byte *fim);
+void operar(byte comando, int *operando1, int *operando2, int *resultado);
+void zerar(byte *array, byte tamanho);
+void enviarErro(byte erro);
+void seind(byte value,byte times);
 #endif
