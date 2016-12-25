@@ -12,10 +12,10 @@ void __processarTransmissao(void);
 void enviar(byte *ponteiro);
 void gravarBuffer(byte valor);
 void enviar(byte *ponteiro, int tamanho);
-token tipoToken(byte *Token);
 void executar(byte *inicio, byte *fim);
-void operar(byte comando, int *operando1, int *operando2, int *resultado);
 void zerar(byte *array, byte tamanho);
 void enviarErro(byte erro);
 void seind(byte value,byte times);
+bool comandoValido(byte marcador);
+token tipoToken(byte *Token);
 #endif
